@@ -1,0 +1,15 @@
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"cSpell.words": [
+		"Firefiles",
+		"Noty",
+		"Unbuffered",
+		"animejs",
+		"bodyparser",
+		"osascript"
+	]
+}
