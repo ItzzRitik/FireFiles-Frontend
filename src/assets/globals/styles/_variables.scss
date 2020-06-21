@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
+
+
+// light theme color variables
+
+$color-background-primary: #FFFFFF;
+$color-background-secondary: #F6F5F7;
+$color-background-tertiary: #EEEEEE;
+
+$color-brand-primary: #41B19B;
+$color-brand-secondary: #40A7AD;
+
+$color-content-primary: #333333;
+$color-content-primary-light: #FFFFFF;
+$color-content-secondary: #444444;
+$color-content-tertiary: #E6E6E6;
+
+// functions
+@function stripUnits($number) {
+  @return $number / ($number * 0 + 1);
+}
