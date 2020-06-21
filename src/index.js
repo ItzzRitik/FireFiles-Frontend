@@ -2,16 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as StyletronProvider } from 'styletron-react';
 import { Client as Styletron } from 'styletron-engine-atomic';
+import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 
 import './index.scss';
-import Main from './containers/Main';
+import Homepage from './pages/homepage/Homepage';
+
 import * as serviceWorker from './serviceWorker';
 
 const engine = new Styletron();
 
 ReactDOM.render(
 	<StyletronProvider value={engine}>
-		<Main />
+		<BrowserRouter basename='/'>
+			<Switch>
+				<Route exact path='/' component={Homepage} />
+				<Route exact path='/*' render={() => (
+					<Redirect to='/' />
+				)}
+				/>
+			</Switch>
+		</BrowserRouter>
 	</StyletronProvider>,
 	document.getElementById('root')
 );
