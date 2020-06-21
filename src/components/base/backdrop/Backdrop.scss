@@ -1,0 +1,16 @@
+@import '../../../assets/globals/styles/variables';
+
+.backdrop {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0; left: 0;
+	
+	&.dim {
+		background-color: #000000;
+		opacity: 0.4;
+	}
+	&.blur {
+		backdrop-filter: blur(5px) brightness(50%);
+	}
+}
