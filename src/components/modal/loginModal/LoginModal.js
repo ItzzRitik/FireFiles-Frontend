@@ -1,4 +1,5 @@
 import React from 'react';
+import isEmail from 'validator/lib/isEmail';
 
 import './LoginModal.scss';
 import Backdrop from '../../base/backdrop/Backdrop';
@@ -8,13 +9,16 @@ import Button from '../../base/button/Button';
 let LoginModal = (props) => {
 	let [showSignUp, setShowSignUp] = React.useState(false),
 		[animateSlide, setAnimateSlide] = React.useState(false),
+		[emailShake, setEmailShake] = React.useState(false),
+		[passwordShake, setPasswordShake] = React.useState(false),
+		[signInLoad, setSignInLoad] = React.useState(false),
 
 		// [name, nameInput] = React.useState({ type: 'text' }),
 		// [emailSignUp, emailSignUpInput] = React.useState({ type: 'text' }),
 		// [passwordSignUp, passwordSignUpInput] = React.useState({ type: 'text' }),
 
-		[email, emailInput] = React.useState({ type: 'text' }),
-		[password, passwordInput] = React.useState({ type: 'text' }),
+		[email, emailInput] = React.useState(''),
+		[password, passwordInput] = React.useState(''),
 
 		onOverlayClick = () => {
 			setAnimateSlide(true);
@@ -25,7 +29,22 @@ let LoginModal = (props) => {
 			window.location.href = '/#';
 		},
 		signIn = () => {
-			console.log(process.env.REACT_APP_SERVER + '/login');
+			if (!isEmail(email)) {
+				setEmailShake(true);
+				setTimeout(() => {
+					setEmailShake(false);
+				}, 600);
+				return;
+			}
+			if (!password) {
+				setPasswordShake(true);
+				setTimeout(() => {
+					setPasswordShake(false);
+				}, 600);
+				return;
+			}
+
+			setSignInLoad(true);
 			const payload = {
 				method: 'POST',
 				credentials: 'include',
@@ -38,23 +57,29 @@ let LoginModal = (props) => {
 
 			fetch(process.env.REACT_APP_SERVER + '/login', payload)
 				.then((res) => {
+					setSignInLoad(false);
 					if (res.status === 200) {
 						window.location = '/dashboard';
 					}
 					else if (res.status === 403) {
-						// Incorrect password
+						setPasswordShake(true);
+						setTimeout(() => {
+							setPasswordShake(false);
+						}, 600);
 					}
 					else if (res.status === 404) {
-						// User not found
+						setEmailShake(true);
+						setTimeout(() => {
+							setEmailShake(false);
+						}, 600);
 					}
 					else {
 						// Error occurred
 					}
-					// eslint-disable-next-line no-alert
 					return res.text();
 				})
 				.then((data) => {
-					console.log(data);
+					// do something with the data
 				});
 		},
 		signUp = () => {
@@ -119,16 +144,20 @@ let LoginModal = (props) => {
 						type='email'
 						placeholder='Email'
 						name='email'
+						shake={emailShake}
+						value={email}
 						onChange={(event) => emailInput(event.target.value)}
 					/>
 					<TextInput
 						type='password'
 						placeholder='Password'
 						name='password'
+						shake={passwordShake}
+						value={password}
 						onChange={(event) => passwordInput(event.target.value)}
 					/>
 					<a href='/'>Forgot your password?</a>
-					<Button onClick={signIn} label='Sign In' />
+					<Button onClick={signIn} label='Sign In' loading={signInLoad} />
 				</div>
 				<div className={'overlayContainer ' + (animateSlide ? 'animate' : '')} onClick={onOverlayClick}>
 					<div className='overlay'>
@@ -141,7 +170,7 @@ let LoginModal = (props) => {
 							<p>Enter your personal details and start journey with us</p>
 						</div>
 					</div>
-					<Button slideButton animate={animateSlide} labels={['Sign up', 'Sign in']} />
+					<Button slideButton slideLeft={showSignUp} labels={['Sign up', 'Sign in']} />
 				</div>
 			</div>
 		</div>
