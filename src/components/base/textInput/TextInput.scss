@@ -1,10 +1,10 @@
 @import '../../../assets/globals/styles/_variables.scss';
 
 .textInput {
-	background-color: $color-background-tertiary;
-	box-shadow: inset 0px 11px 0px 10px $color-background-tertiary, inset 0px -11px 0px 10px $color-background-tertiary;
+	background-color: var(--color-background-tertiary);
+	box-shadow: inset 0px 11px 0px 10px var(--color-background-tertiary), inset 0px -11px 0px 10px var(--color-background-tertiary);
 	border: none;
-	color: $color-content-primary;
+	color: var(--color-content-primary);
 	padding: 12px 15px;
 	margin: 8px 0;
 	width: 80%;
@@ -15,9 +15,37 @@
 	transition: all 0.2s ease-in;
 
 	&:focus {
-		background-color: $color-background-primary;
-		box-shadow: inset 0px 0px 0px 0px $color-background-secondary, inset 0px 0px 0px 0px $color-background-secondary;
-		border: 1px solid $color-background-tertiary;
+		background-color: var(--color-background-primary);
+		box-shadow: inset 0px 0px 0px 0px var(--color-background-secondary), inset 0px 0px 0px 0px var(--color-background-secondary);
+		border: 1px solid var(--color-background-tertiary);
 		transition: all 0.2s ease-out;
+	}
+	&.shake {
+		border-color: #ffcbcb;
+		transition: all 0.2s ease-out;
+		animation: shake 0.65s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+	}
+}
+
+@keyframes shake {
+	0%, 100% {
+	  -webkit-transform: translateX(0);
+			  transform: translateX(0);
+	}
+	10%, 30%, 50%, 70% {
+	  -webkit-transform: translateX(-10px);
+			  transform: translateX(-10px);
+	}
+	20%, 40%, 60% {
+	  -webkit-transform: translateX(10px);
+			  transform: translateX(10px);
+	}
+	80% {
+	  -webkit-transform: translateX(8px);
+			  transform: translateX(8px);
+	}
+	90% {
+	  -webkit-transform: translateX(-8px);
+			  transform: translateX(-8px);
 	}
 }

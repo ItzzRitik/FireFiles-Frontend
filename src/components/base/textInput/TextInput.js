@@ -3,7 +3,7 @@ import './TextInput.scss';
 
 let TextInput = (props) => {
 	return (
-		<input className='textInput'
+		<input className={'textInput ' + (props.shake ? 'shake' : '')}
 			type={props.type}
 			name={props.name}
 			placeholder={props.placeholder}
