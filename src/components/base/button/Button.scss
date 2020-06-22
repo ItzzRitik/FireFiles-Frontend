@@ -1,0 +1,66 @@
+@import '../../../assets/globals/styles/variables';
+
+$transitionDuration: 0.6s;
+
+.button {
+	border-radius: 20px;
+	border: 1px solid $color-brand-primary;
+	background: $color-brand-primary;
+	color: $color-content-primary-light;
+	font-size: 14px;
+	font-weight: normal;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	margin-top: 20px;
+	outline: none;
+	min-width: 180px;
+	height: 40px;
+	transition: all 100ms ease-in-out;
+	font-family: 'Montserrat', sans-serif;
+	cursor: pointer;
+
+	&:hover {
+		color: $color-brand-primary;
+		font-weight: normal;
+		transform: scale(1.03);
+		background: transparent;
+		transition: all 100ms ease-in-out;
+	}
+	&:active {
+		transform: scale(0.95);
+	}
+
+	.slideButton {
+		position: absolute;
+		background-color: transparent;
+		color: $color-content-primary-light;
+		border-color: $color-content-primary-light;
+		left: 50%;
+		bottom: 32%;
+		padding: 12px 12px;
+		width: calc(80% - 120px);
+		min-width: 130px;
+		overflow: hidden;
+		transform: translateX(-50%);
+
+		p {
+			position: absolute;
+			top: 50%;
+			left: 0;
+			right: 0;
+			margin: 0;
+			font-size: 14px;
+			transform: translateY(-50%);
+			transition: transform $transitionDuration linear, opacity $transitionDuration*2/3 linear;
+
+			&:nth-child(1) {
+				opacity: 1;
+				transform: translateY(-50%) translateX(0%);
+			}
+			&:nth-child(2) {
+				opacity: 0;
+				transform: translateY(-50%) translateX(-70%);
+			}
+		}
+	}
+}

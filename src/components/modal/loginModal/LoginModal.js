@@ -3,6 +3,7 @@ import React from 'react';
 import './LoginModal.scss';
 import Backdrop from '../../base/backdrop/Backdrop';
 import TextInput from '../../base/textInput/TextInput';
+import Button from '../../base/button/Button';
 
 let LoginModal = (props) => {
 	let [showSignUp, setShowSignUp] = React.useState(false),
@@ -104,7 +105,7 @@ let LoginModal = (props) => {
 					<TextInput type='name' name='name' placeholder='Name' />
 					<TextInput type='email' name='email' placeholder='Email' />
 					<TextInput type='password' name='password' placeholder='Password' />
-					<button className='signButton' id='signUp' onClick={signUp}>Sign Up</button>
+					<Button onClick={signUp} label='Sign Up' />
 				</div>
 				<div className='formContainer signInContainer'>
 					<h1 className='formHeader'>Sign in to Firefiles</h1>
@@ -127,7 +128,7 @@ let LoginModal = (props) => {
 						onChange={(event) => passwordInput(event.target.value)}
 					/>
 					<a href='/'>Forgot your password?</a>
-					<button className='signButton' id='signIn' onClick={signIn}>Sign In</button>
+					<Button onClick={signIn} label='Sign In' />
 				</div>
 				<div className={'overlayContainer ' + (animateSlide ? 'animate' : '')} onClick={onOverlayClick}>
 					<div className='overlay'>
@@ -140,10 +141,7 @@ let LoginModal = (props) => {
 							<p>Enter your personal details and start journey with us</p>
 						</div>
 					</div>
-					<button className='signButton slide'>
-						<p>Sign up</p>
-						<p>Sign in</p>
-					</button>
+					<Button slideButton animate={animateSlide} labels={['Sign up', 'Sign in']} />
 				</div>
 			</div>
 		</div>
