@@ -12,6 +12,8 @@ import * as serviceWorker from './serviceWorker';
 
 const engine = new Styletron();
 
+document.querySelector('.app').classList.add('light');
+
 ReactDOM.render(
 	<StyletronProvider value={engine}>
 		<BrowserRouter basename='/'>
@@ -23,10 +25,7 @@ ReactDOM.render(
 			</Switch>
 		</BrowserRouter>
 	</StyletronProvider>,
-	document.getElementById('root')
+	document.querySelector('.app')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register();
