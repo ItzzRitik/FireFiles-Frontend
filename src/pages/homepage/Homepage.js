@@ -27,10 +27,8 @@ let Homepage = () => {
 
 	return (
 		<div className='homepage'>
-			<marquee>
-				<a href='#login'>LOGIN</a>
-			</marquee>
-			<LoginModal show={showLoginModal} />
+			<center> <a href='#login'>LOGIN</a> </center>
+			{showLoginModal && <LoginModal />}
 		</div>
 	);
 };
