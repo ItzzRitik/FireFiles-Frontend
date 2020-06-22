@@ -3,7 +3,7 @@ import './Backdrop.scss';
 
 let Backdrop = (props) => {
 	return (
-		<div className={'backdrop ' + (props.blur ? 'blur' : 'dim')} />
+		<div className={'backdrop ' + (props.blur ? 'blur' : 'dim')} onClick={props.onClick} />
 	);
 };
 
