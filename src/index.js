@@ -16,10 +16,8 @@ ReactDOM.render(
 		<BrowserRouter basename='/'>
 			<Switch>
 				<Route exact path='/' component={Homepage} />
-				<Route exact path='/*' render={() => (
-					<Redirect to='/' />
-				)}
-				/>
+				<Route exact path='/login' render={() => (<Redirect to='/#login' />)} />
+				<Route exact path='/*' render={() => (<Redirect to='/' />)} />
 			</Switch>
 		</BrowserRouter>
 	</StyletronProvider>,
