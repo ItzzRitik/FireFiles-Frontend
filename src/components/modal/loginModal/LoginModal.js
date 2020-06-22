@@ -59,7 +59,9 @@ let LoginModal = (props) => {
 				.then((res) => {
 					setSignInLoad(false);
 					if (res.status === 200) {
-						window.location = '/dashboard';
+						setTimeout(() => {
+							window.location = '/dashboard';
+						}, 300);
 					}
 					else if (res.status === 403) {
 						setPasswordShake(true);
