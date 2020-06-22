@@ -4,7 +4,8 @@ import './Button.scss';
 let Button = (props) => {
 	let classList = 'button ';
 	props.slideButton && (classList += 'slideButton ');
-	props.animate && (classList += 'animate ');
+	props.slideLeft && (classList += 'slideLeft ');
+	props.loading && (classList += 'loading ');
 	return (
 		<button className={classList} onClick={props.onClick}>
 			{

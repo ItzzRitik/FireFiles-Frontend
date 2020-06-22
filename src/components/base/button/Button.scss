@@ -1,12 +1,10 @@
-@import '../../../assets/globals/styles/variables';
-
 $transitionDuration: 0.6s;
 
 .button {
 	border-radius: 20px;
-	border: 1px solid $color-brand-primary;
-	background: $color-brand-primary;
-	color: $color-content-primary-light;
+	border: 1px solid var(--color-brand-primary);
+	background: var(--color-brand-primary);
+	color: var(--color-content-primary-light);
 	font-size: 14px;
 	font-weight: normal;
 	letter-spacing: 1px;
@@ -20,7 +18,7 @@ $transitionDuration: 0.6s;
 	cursor: pointer;
 
 	&:hover {
-		color: $color-brand-primary;
+		color: var(--color-brand-primary);
 		font-weight: normal;
 		transform: scale(1.03);
 		background: transparent;
@@ -30,11 +28,34 @@ $transitionDuration: 0.6s;
 		transform: scale(0.95);
 	}
 
-	.slideButton {
+	&.loading {
+		min-width: 40px;
+		width: 40px;
+		background: transparent;
+		color: transparent;
+		pointer-events: none;
+		transition: all 100ms ease-in-out;
+		border-width: 2px;
+		border-top-color: transparent;
+		border-bottom-color: transparent;
+		animation: rotate 0.3s linear infinite;
+		animation-delay: 0.1s;
+
+		@keyframes rotate {
+			0% {
+				transform: rotate(0deg) scale(0.7);
+		    }
+			100% {
+			 	transform: rotate(180deg) scale(0.7);
+			}
+		}
+	}
+
+	&.slideButton {
 		position: absolute;
 		background-color: transparent;
-		color: $color-content-primary-light;
-		border-color: $color-content-primary-light;
+		color: var(--color-content-primary-light);
+		border-color: var(--color-content-primary-light);
 		left: 50%;
 		bottom: 32%;
 		padding: 12px 12px;
@@ -60,6 +81,19 @@ $transitionDuration: 0.6s;
 			&:nth-child(2) {
 				opacity: 0;
 				transform: translateY(-50%) translateX(-70%);
+			}
+		}
+
+		&.slideLeft {
+			p {
+				&:nth-child(1) {
+					opacity: 0;
+					transform: translateY(-50%) translateX(70%);
+				}
+				&:nth-child(2) {
+					opacity: 1;
+					transform: translateY(-50%) translateX(0%);
+				}
 			}
 		}
 	}
