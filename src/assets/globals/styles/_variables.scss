@@ -2,17 +2,28 @@
 
 // light theme color variables
 
-$color-background-primary: #FFFFFF;
-$color-background-secondary: #F6F5F7;
-$color-background-tertiary: #EEEEEE;
+.app {
+	width: 100%;
+	height: 100%;
+}
 
-$color-brand-primary: #3EA2E7;
-$color-brand-secondary: #1f7dbb;
-
-$color-content-primary: #333333;
-$color-content-primary-light: #FFFFFF;
-$color-content-secondary: #444444;
-$color-content-tertiary: #E6E6E6;
+.light {
+	--color-background-primary: #FFFFFF;
+	--color-background-secondary: #F6F5F7;
+	--color-background-tertiary: #EEEEEE;
+	
+	--color-brand-primary: #3EA2E7;
+	--color-brand-secondary: #1F7DBB;
+	
+	--color-content-primary: #333333;
+	--color-content-primary-light: #FFFFFF;
+	--color-content-secondary: #444444;
+	--color-content-tertiary: #E6E6E6;
+	
+	--color-alert-success: #5CB85C;
+	--color-alert-warning: #F0AD4E;
+	--color-alert-error: #D9534F;
+}
 
 // functions
 @function stripUnits($number) {
