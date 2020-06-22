@@ -21,9 +21,9 @@ let LoginModal = (props) => {
 				<div className='formContainer signUpContainer'>
 					<h1 className='formHeader'>Create Account</h1>
 					<div className='socialContainer'>
-						<a href='#' className='social'><i className='fab fa-facebook-f' /></a>
-						<a href='#' className='social'><i className='fab fa-google-plus-g' /></a>
-						<a href='#' className='social'><i className='fab fa-linkedin-in' /></a>
+						<a className='social'><i className='fab fa-facebook-f' /></a>
+						<a className='social'><i className='fab fa-google-plus-g' /></a>
+						<a className='social'><i className='fab fa-linkedin-in' /></a>
 					</div>
 					<span>or use your email for registration</span>
 					<input id='nameSignUp' type='text' placeholder='Name' />
@@ -34,14 +34,14 @@ let LoginModal = (props) => {
 				<div className='formContainer signInContainer'>
 					<h1 className='formHeader'>Sign in to Firefiles</h1>
 					<div className='socialContainer'>
-						<a href='#' className='social'><i className='fab fa-facebook-f' /></a>
-						<a href='#' className='social'><i className='fab fa-google-plus-g' /></a>
-						<a href='#' className='social'><i className='fab fa-linkedin-in' /></a>
+						<a className='social'><i className='fab fa-facebook-f' /></a>
+						<a className='social'><i className='fab fa-google-plus-g' /></a>
+						<a className='social'><i className='fab fa-linkedin-in' /></a>
 					</div>
 					<span>or use your account</span>
 					<input id='emailLogin' type='email' placeholder='Email' />
 					<input id='passwordLogin' type='password' placeholder='Password' />
-					<a href='#'>Forgot your password?</a>
+					<a>Forgot your password?</a>
 					<button className='signButton' id='signIn'>Sign In</button>
 				</div>
 				<div className={'overlayContainer ' + (animateSlide ? 'animate' : '')} onClick={onOverlayClick}>
