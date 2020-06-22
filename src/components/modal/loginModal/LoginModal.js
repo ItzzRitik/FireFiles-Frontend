@@ -1,7 +1,4 @@
 import React from 'react';
-import Noty from 'noty';
-
-// import Axios from 'axios';
 
 import './LoginModal.scss';
 import Backdrop from '../../base/backdrop/Backdrop';
@@ -26,8 +23,6 @@ let LoginModal = (props) => {
 			setAnimateSlide(false);
 			window.location.href = '/#';
 		},
-
-		notyTheme = 'relax',
 		signIn = () => {
 			console.log(process.env.REACT_APP_SERVER + '/login');
 			const payload = {
@@ -41,63 +36,25 @@ let LoginModal = (props) => {
 			};
 
 			fetch(process.env.REACT_APP_SERVER + '/login', payload)
-				.then((response) => response)
+				.then((res) => {
+					if (res.status === 200) {
+						window.location = '/dashboard';
+					}
+					else if (res.status === 403) {
+						// Incorrect password
+					}
+					else if (res.status === 404) {
+						// User not found
+					}
+					else {
+						// Error occurred
+					}
+					// eslint-disable-next-line no-alert
+					return res.text();
+				})
 				.then((data) => {
 					console.log(data);
-
-					// new Noty({
-					// 	text: (xhr.status === 200) ? 'Yayy! Successfully logged in!' : xhr.responseText,
-					// 	type: (xhr.status === 200) ? 'success' : 'error',
-					// 	theme: notyTheme,
-
-					// 	// layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-					// 	timeout: 5000
-					// }).show();
 				});
-
-			// Axios.post(process.env.REACT_APP_SERVER + '/login', {
-			// 	email: email,
-			// 	password: password
-			// }).then(function (response) {
-			// 	console.log('Response -> ', response);
-			// }).catch(function (error) {
-			// 	console.log('Error -> ', error);
-			// });
-
-			// const xhr = new XMLHttpRequest();
-			// xhr.open('POST', process.env.REACT_APP_SERVER + '/login');
-			// xhr.setRequestHeader('Content-type', 'application/json');
-			// xhr.onreadystatechange = function () {
-			// 	if (xhr.readyState === XMLHttpRequest.DONE) {
-			// new Noty({
-			// 	text: (xhr.status === 200) ? 'Yayy! Successfully logged in!' : xhr.responseText,
-			// 	type: (xhr.status === 200) ? 'success' : 'error',
-			// 	theme: notyTheme,
-
-			// 	// layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-			// 	timeout: 5000
-			// }).show();
-
-			// 		if (xhr.status === 200) {
-			// 			setTimeout(function () {
-			// 				window.location = '/dashboard';
-			// 			}, 2000);
-			// 		}
-			// 		else if (xhr.status === 403) {
-			// 		// Incorrect password
-			// 		}
-			// 		else if (xhr.status === 404) {
-			// 		// User not found
-			// 		}
-			// 		else {
-			// 		// Error occurred
-			// 		}
-			// 	}
-			// };
-			// xhr.send(JSON.stringify({
-			// 	email: email,
-			// 	password: password
-			// }));
 		},
 		signUp = () => {
 			const xhr = new XMLHttpRequest();
@@ -105,14 +62,14 @@ let LoginModal = (props) => {
 			xhr.setRequestHeader('Content-type', 'application/json');
 			xhr.onreadystatechange = function () {
 				if (xhr.readyState === XMLHttpRequest.DONE) {
-					new Noty({
-						text: xhr.responseText,
-						type: (xhr.status === 201) ? 'success' : 'error',
-						theme: notyTheme,
+					// new Noty({
+					// 	text: xhr.responseText,
+					// 	type: (xhr.status === 201) ? 'success' : 'error',
+					// 	theme: notyTheme,
 
-						// layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-						timeout: 5000
-					}).show();
+					// 	// layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+					// 	timeout: 5000
+					// }).show();
 
 					if (xhr.status === 201 || xhr.status === 400) {
 					// $('#emailLogin').val($('#emailSignUp').val());
