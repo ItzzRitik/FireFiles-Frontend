@@ -12,7 +12,7 @@ let Dashboard = () => {
 		};
 		fetch(process.env.REACT_APP_SERVER + '/getUser', payload)
 			.then((response) => {
-				if (response.status == 200) return response.json();
+				if (response.status === 200) return response.json();
 			}).then((user) => {
 				if (user) {
 					window.user = user;
