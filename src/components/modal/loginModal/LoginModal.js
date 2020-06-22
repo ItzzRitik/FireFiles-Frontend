@@ -9,16 +9,20 @@ import Button from '../../base/button/Button';
 let LoginModal = (props) => {
 	let [showSignUp, setShowSignUp] = React.useState(false),
 		[animateSlide, setAnimateSlide] = React.useState(false),
+
+		[email, emailInput] = React.useState(''),
+		[password, passwordInput] = React.useState(''),
 		[emailShake, setEmailShake] = React.useState(false),
 		[passwordShake, setPasswordShake] = React.useState(false),
 		[signInLoad, setSignInLoad] = React.useState(false),
 
-		// [name, nameInput] = React.useState({ type: 'text' }),
-		// [emailSignUp, emailSignUpInput] = React.useState({ type: 'text' }),
-		// [passwordSignUp, passwordSignUpInput] = React.useState({ type: 'text' }),
-
-		[email, emailInput] = React.useState(''),
-		[password, passwordInput] = React.useState(''),
+		[name, nameInput] = React.useState(''),
+		[emailSignUp, emailSignUpInput] = React.useState(''),
+		[passwordSignUp, passwordSignUpInput] = React.useState(''),
+		[nameShake, setNameShake] = React.useState(false),
+		[emailSignUpShake, setEmailSignUpShake] = React.useState(false),
+		[passwordSignUpShake, setPasswordSignUpShake] = React.useState(false),
+		[signUpLoad, setSignUpLoad] = React.useState(false),
 
 		onOverlayClick = () => {
 			setAnimateSlide(true);
@@ -85,36 +89,57 @@ let LoginModal = (props) => {
 				});
 		},
 		signUp = () => {
-			const xhr = new XMLHttpRequest();
-			xhr.open('POST', '/signup');
-			xhr.setRequestHeader('Content-type', 'application/json');
-			xhr.onreadystatechange = function () {
-				if (xhr.readyState === XMLHttpRequest.DONE) {
-					// new Noty({
-					// 	text: xhr.responseText,
-					// 	type: (xhr.status === 201) ? 'success' : 'error',
-					// 	theme: notyTheme,
+			if (!name) {
+				setNameShake(true);
+				setTimeout(() => {
+					setNameShake(false);
+				}, 600);
+				return;
+			}
+			if (!isEmail(emailSignUp)) {
+				setEmailSignUpShake(true);
+				setTimeout(() => {
+					setEmailSignUpShake(false);
+				}, 600);
+				return;
+			}
+			if (!passwordSignUp.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)) {
+				setPasswordSignUpShake(true);
+				setTimeout(() => {
+					setPasswordSignUpShake(false);
+				}, 600);
+				return;
+			}
 
-					// 	// layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-					// 	timeout: 5000
-					// }).show();
-
-					if (xhr.status === 201 || xhr.status === 400) {
-					// $('#emailLogin').val($('#emailSignUp').val());
-					// $('#emailSignUp').val('');
-
-					// $('#passwordLogin').focus();
-					// $('#passwordSignUp').val('');
-					// $('.overlayContainer').click();
-					}
-				}
+			setSignUpLoad(true);
+			const payload = {
+				method: 'POST',
+				credentials: 'include',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					name: name,
+					email: emailSignUp,
+					password: passwordSignUp
+				})
 			};
 
-		// xhr.send(JSON.stringify({
-		// 	name: $('#nameSignUp').val(),
-		// 	email: $('#emailSignUp').val(),
-		// 	password: $('#passwordSignUp').val()
-		// }));
+			fetch(process.env.REACT_APP_SERVER + '/signup', payload)
+				.then((res) => {
+					setSignUpLoad(false);
+					console.log(res.status);
+					if (res.status === 201 || res.status === 400) {
+						emailInput(emailSignUp);
+						emailSignUpInput('');
+						passwordSignUpInput('');
+						passwordInput('');
+						setShowSignUp(false);
+					}
+					return res.text();
+				})
+				.then((data) => {
+					// do something with the data
+					console.log(data);
+				});
 		};
 
 	return (
@@ -129,10 +154,31 @@ let LoginModal = (props) => {
 						<a href='/' className='social'><i className='fab fa-linkedin-in' /></a>
 					</div>
 					<span>or use your email for registration</span>
-					<TextInput type='name' name='name' placeholder='Name' />
-					<TextInput type='email' name='email' placeholder='Email' />
-					<TextInput type='password' name='password' placeholder='Password' />
-					<Button onClick={signUp} label='Sign Up' />
+					<TextInput
+						type='text'
+						autoComplete='name'
+						placeholder='Name'
+						shake={nameShake}
+						value={name}
+						onChange={(event) => nameInput(event.target.value)}
+					/>
+					<TextInput
+						type='email'
+						autoComplete='email'
+						placeholder='Email'
+						shake={emailSignUpShake}
+						value={emailSignUp}
+						onChange={(event) => emailSignUpInput(event.target.value)}
+					/>
+					<TextInput
+						type='password'
+						autoComplete='password'
+						placeholder='Password'
+						shake={passwordSignUpShake}
+						value={passwordSignUp}
+						onChange={(event) => passwordSignUpInput(event.target.value)}
+					/>
+					<Button onClick={signUp} label='Sign Up' loading={signUpLoad} />
 				</div>
 				<div className='formContainer signInContainer'>
 					<h1 className='formHeader'>Sign in to Firefiles</h1>
@@ -144,16 +190,16 @@ let LoginModal = (props) => {
 					<span>or use your account</span>
 					<TextInput
 						type='email'
+						autoComplete='email'
 						placeholder='Email'
-						name='email'
 						shake={emailShake}
 						value={email}
 						onChange={(event) => emailInput(event.target.value)}
 					/>
 					<TextInput
 						type='password'
+						autoComplete='password'
 						placeholder='Password'
-						name='password'
 						shake={passwordShake}
 						value={password}
 						onChange={(event) => passwordInput(event.target.value)}

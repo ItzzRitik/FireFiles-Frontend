@@ -5,8 +5,9 @@ let TextInput = (props) => {
 	return (
 		<input className={'textInput ' + (props.shake ? 'shake' : '')}
 			type={props.type}
-			name={props.name}
+			autoComplete={props.autoComplete}
 			placeholder={props.placeholder}
+			value={props.value}
 			onChange={props.onChange}
 		/>
 	);
