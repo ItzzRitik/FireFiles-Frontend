@@ -19,10 +19,10 @@
 		border-radius: 5px;
 		outline: none;
 		font-family: 'Montserrat', sans-serif;
-		transition: all 0.2s ease-in;
+		-webkit-font-smoothing: antialiased;
+    	-moz-osx-font-smoothing: grayscale;
 
 		&.password {
-			-webkit-text-security: circle;
 			padding: 12px 42px;
 		}
 	}

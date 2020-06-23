@@ -1,11 +1,10 @@
 import React from 'react';
 
-import Eye from './img/Eye.svg';
-
+import Eye from './assets/Eye.svg';
 import './TextInput.scss';
 
 let TextInput = (props) => {
-	let [eyeMouseDown, setEyeMouseDown] = React.useState(false),
+	const [eyeMouseDown, setEyeMouseDown] = React.useState(false),
 		eyeMask = {
 			WebkitMaskImage: 'url(' + Eye + ')',
 			maskImage: 'url(' + Eye + ')',
@@ -14,16 +13,12 @@ let TextInput = (props) => {
 			WebkitMaskRepeat: 'no-repeat',
 			maskRepeat: 'no-repeat',
 			background: 'var(--color-content-tertiary)'
-		},
-		classList = '';
-
-	props.shake && (classList += 'shake ');
-	props.type === 'password' && !eyeMouseDown && (classList += 'password ');
+		};
 
 	return (
 		<div className='textInput'>
-			<input className={classList}
-				type='text'
+			<input className={(props.shake ? 'shake ' : '') + (props.type === 'password' ? 'password ' : '')}
+				type={eyeMouseDown ? 'text' : props.type}
 				autoComplete={props.autoComplete}
 				placeholder={props.placeholder}
 				value={props.value}
@@ -32,7 +27,12 @@ let TextInput = (props) => {
 			{
 				props.type === 'password' &&
 				<div className='eye'
-					onMouseDown={(event) => setEyeMouseDown(event.button === 0)}
+					onMouseDown={(event) => {
+						let button = event.button;
+						setTimeout(() => {
+							setEyeMouseDown(button === 0);
+						}, 100);
+					}}
 					onMouseUp={(event) => setEyeMouseDown(false)}
 				>
 					<p className='eyelid upper' style={eyeMask} />

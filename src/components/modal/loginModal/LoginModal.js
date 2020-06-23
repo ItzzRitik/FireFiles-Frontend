@@ -164,7 +164,7 @@ let LoginModal = (props) => {
 					/>
 					<TextInput
 						type='email'
-						autoComplete='email'
+						autoComplete='off'
 						placeholder='Email'
 						shake={emailSignUpShake}
 						value={emailSignUp}
@@ -172,7 +172,7 @@ let LoginModal = (props) => {
 					/>
 					<TextInput
 						type='password'
-						autoComplete='password'
+						autoComplete='off'
 						placeholder='Password'
 						shake={passwordSignUpShake}
 						value={passwordSignUp}
