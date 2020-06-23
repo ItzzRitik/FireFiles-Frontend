@@ -20,7 +20,7 @@
         "max-len": ["error", { "code": 130 }],
         "no-return-assign": ["off"],
         "quotes": ["error", "single"],
-        "indent": ["error", "tab", { "SwitchCase": 2 }],
+        "indent": ["error", "tab", { "SwitchCase": 1 }],
         "no-trailing-spaces": "error",
         "no-constant-condition": "error",
         "no-debugger": "error",
