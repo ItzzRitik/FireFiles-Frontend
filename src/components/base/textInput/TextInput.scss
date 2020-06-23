@@ -1,9 +1,11 @@
 @import '../../../assets/globals/styles/_variables.scss';
 
+$inputHeight: 42px;
+
 .textInput {
 	position: relative;
 	width: 85%;
-	height: 42px;
+	height: $inputHeight;
 	margin: 8px 0;
 	border-radius: 5px;
 	overflow: hidden;
@@ -14,7 +16,7 @@
 		box-shadow: inset 0px 11px 0px 10px var(--color-background-tertiary), inset 0px -11px 0px 10px var(--color-background-tertiary);
 		border: none;
 		color: var(--color-content-primary);
-		padding: 12px 10px 12px 42px;
+		padding: 12px 10px 12px 12px;
 		border: 1px solid transparent;
 		border-radius: 5px;
 		outline: none;
@@ -22,8 +24,11 @@
 		-webkit-font-smoothing: antialiased;
     	-moz-osx-font-smoothing: grayscale;
 
+		&.icon {
+			padding-left: $inputHeight;
+		}
 		&.password {
-			padding: 12px 42px;
+			padding-right: $inputHeight;
 		}
 	}
 
@@ -39,11 +44,29 @@
 		animation: shake 0.65s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 	}
 
+	.inputIcon {
+		display: flex;
+		position: absolute;
+		top: 0; left: 0;
+		width: $inputHeight; 
+		height: $inputHeight;
+		justify-content: center;
+		align-items: center;
+
+		span {
+			position: absolute;
+			width: 18px;
+			height: 18px;
+			margin: 0;
+		}
+	}
+
 	.eye {
 		display: flex;
 		position: absolute;
 		top: 0; right: 0;
-		width: 42px; height: 42px;
+		width: $inputHeight; 
+		height: $inputHeight;
 		justify-content: center;
 		align-items: center;
 		cursor: pointer;
@@ -55,28 +78,22 @@
 			top: 50%;
 			margin: 0;
 			transition: all 0.2s ease-in;
-			
-			&.upper {
-				transform-origin: top;
-			}
-			&.upper {
-				transform-origin: top;
-			}
+			transform-origin: top;
 		}
 		.pupil {
 			position: absolute;
-			margin: 1px 0;
+			margin: 0;
 			width: 10%;
 			height: 10%;
 			border-radius: 50%;
-			border: 1px solid var(--color-content-tertiary);
+			border: 1px solid var(--color-brand-secondary);
 			opacity: 0;
 			transition: all 0s ease-in;
 			transition-delay: 0.1s;
 		}
 
 		&:active {
-			.eyelid.upper{
+			.eyelid {
 				transform: rotateX(180deg);
 			}
 			.pupil {

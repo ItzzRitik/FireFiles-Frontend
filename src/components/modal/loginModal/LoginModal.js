@@ -158,6 +158,7 @@ let LoginModal = (props) => {
 						type='text'
 						autoComplete='name'
 						placeholder='Name'
+						icon
 						shake={nameShake}
 						value={name}
 						onChange={(event) => nameInput(event.target.value)}
@@ -166,6 +167,7 @@ let LoginModal = (props) => {
 						type='email'
 						autoComplete='off'
 						placeholder='Email'
+						icon
 						shake={emailSignUpShake}
 						value={emailSignUp}
 						onChange={(event) => emailSignUpInput(event.target.value)}
@@ -174,6 +176,7 @@ let LoginModal = (props) => {
 						type='password'
 						autoComplete='off'
 						placeholder='Password'
+						icon
 						shake={passwordSignUpShake}
 						value={passwordSignUp}
 						onChange={(event) => passwordSignUpInput(event.target.value)}
@@ -192,6 +195,7 @@ let LoginModal = (props) => {
 						type='email'
 						autoComplete='email'
 						placeholder='Email'
+						icon
 						shake={emailShake}
 						value={email}
 						onChange={(event) => emailInput(event.target.value)}
@@ -200,6 +204,7 @@ let LoginModal = (props) => {
 						type='password'
 						autoComplete='password'
 						placeholder='Password'
+						icon
 						shake={passwordShake}
 						value={password}
 						onChange={(event) => passwordInput(event.target.value)}
