@@ -1,18 +1,31 @@
 @import '../../../assets/globals/styles/_variables.scss';
 
 .textInput {
-	background-color: var(--color-background-tertiary);
-	box-shadow: inset 0px 11px 0px 10px var(--color-background-tertiary), inset 0px -11px 0px 10px var(--color-background-tertiary);
-	border: none;
-	color: var(--color-content-primary);
-	padding: 12px 15px;
+	position: relative;
+	width: 85%;
+	height: 42px;
 	margin: 8px 0;
-	width: 80%;
-	outline: none;
-	border: 1px solid transparent;
 	border-radius: 5px;
-	font-family: 'Montserrat', sans-serif;
-	transition: all 0.2s ease-in;
+	overflow: hidden;
+	
+	input {
+		width: 100%;
+		background-color: var(--color-background-tertiary);
+		box-shadow: inset 0px 11px 0px 10px var(--color-background-tertiary), inset 0px -11px 0px 10px var(--color-background-tertiary);
+		border: none;
+		color: var(--color-content-primary);
+		padding: 12px 10px 12px 42px;
+		border: 1px solid transparent;
+		border-radius: 5px;
+		outline: none;
+		font-family: 'Montserrat', sans-serif;
+		transition: all 0.2s ease-in;
+
+		&.password {
+			-webkit-text-security: circle;
+			padding: 12px 42px;
+		}
+	}
 
 	&:focus {
 		background-color: var(--color-background-primary);
@@ -24,6 +37,54 @@
 		border-color: #ffcbcb;
 		transition: all 0.2s ease-out;
 		animation: shake 0.65s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+	}
+
+	.eye {
+		display: flex;
+		position: absolute;
+		top: 0; right: 0;
+		width: 42px; height: 42px;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+
+		.eyelid {
+			width: 18px;
+			height: 13px;
+			position: absolute;
+			top: 50%;
+			margin: 0;
+			transition: all 0.2s ease-in;
+			
+			&.upper {
+				transform-origin: top;
+			}
+			&.upper {
+				transform-origin: top;
+			}
+		}
+		.pupil {
+			position: absolute;
+			margin: 1px 0;
+			width: 10%;
+			height: 10%;
+			border-radius: 50%;
+			border: 1px solid var(--color-content-tertiary);
+			opacity: 0;
+			transition: all 0s ease-in;
+			transition-delay: 0.1s;
+		}
+
+		&:active {
+			.eyelid.upper{
+				transform: rotateX(180deg);
+			}
+			.pupil {
+				opacity: 1;
+				transition: all 0.1s ease-in;
+				transition-delay: 0.1s;
+			}
+		}
 	}
 }
 

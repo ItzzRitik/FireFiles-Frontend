@@ -13,6 +13,7 @@ $transitionInterpolator: cubic-bezier(0.455, 0.030, 0.515, 0.955);
 	user-select: none;
 
 	.mainContainer {
+		position:relative;
 		background-color: var(--color-background-primary);
 		border-radius: 20px;
 		box-shadow: 0 20px 40px rgba(0,0,0,.2), 0 20px 40px hsla(0,0%,100%,.15);
@@ -110,7 +111,7 @@ $transitionInterpolator: cubic-bezier(0.455, 0.030, 0.515, 0.955);
 				background-repeat: no-repeat;
 				background-size: cover;
 				background-position: 0 0;
-				color: var(--color-content-primary-light);
+				color: var(--color-content-primary-alternate);
 				position: relative;
 				left: -100%;
 				height: 100%;
