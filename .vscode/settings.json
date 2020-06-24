@@ -11,6 +11,7 @@
 		"Unbuffered",
 		"animejs",
 		"bodyparser",
+		"fullpage",
 		"osascript"
 	]
 }

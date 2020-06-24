@@ -9,6 +9,7 @@ import * as serviceWorker from './serviceWorker';
 
 import Homepage from './pages/homepage/Homepage';
 import Dashboard from './pages/dashboard/Dashboard';
+import Logout from './pages/logout/Logout';
 
 document.querySelector('.app').classList.add('light');
 
@@ -17,8 +18,9 @@ ReactDOM.render(
 		<BrowserRouter basename='/'>
 			<Switch>
 				<Route exact path='/' component={Homepage} />
-				<Route exact path='/login' render={() => (<Redirect to='/#login' />)} />
 				<Route exact path='/dashboard' component={Dashboard} />
+				<Route exact path='/logout' component={Logout} />
+				<Route exact path='/login' render={() => (<Redirect to='/#login' />)} />
 				<Route exact path='/*' render={() => (<Redirect to='/' />)} />
 			</Switch>
 		</BrowserRouter>
