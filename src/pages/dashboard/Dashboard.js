@@ -1,8 +1,12 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
+import Loader from '../../components/base/loader/Loader';
 import './Dashboard.scss';
 
 let Dashboard = () => {
-	const [isBusy, setBusy] = React.useState(true);
+	const [isBusy, setBusy] = React.useState(true),
+		history = useHistory();
 
 	React.useEffect(() => {
 		const payload = {
@@ -11,25 +15,26 @@ let Dashboard = () => {
 			headers: { 'Content-Type': 'application/json' }
 		};
 		fetch(process.env.REACT_APP_SERVER + '/getUser', payload)
-			.then((response) => {
-				if (response.status === 200) return response.json();
+			.then((res) => {
+				if (res.ok) return res.json();
 			}).then((user) => {
 				if (user) {
 					window.user = user;
 					setBusy(false);
 				}
-				else window.location = '/#login';
+				else history.push('/#login');
+			}).catch((err) => {
+				console.log(err);
 			});
-	  }, []);
+	  	}, [history]);
+
 	return (
-		<div className='dashboard' >
-			{
-				isBusy ?
-					<div>Loading</div>
-					:
-					<div>This is your dashboard</div>
-			}
-		</div>
+		isBusy ?
+			<Loader fullpage />
+			:
+			<div className='dashboard'>
+				{'This is you dashboard'}
+			</div>
 	);
 };
 
