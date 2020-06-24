@@ -19,7 +19,6 @@ let TextInput = (props) => {
 			}
 		},
 		getMask = (icon) => {
-			console.log(icon);
 			let mask = {
 				maskImage: 'url(' + icon + ')',
 				WebkitMaskImage: 'url(' + icon + ')',
@@ -27,8 +26,8 @@ let TextInput = (props) => {
 				WebkitMaskSize: '18px',
 				maskRepeat: 'no-repeat',
 				WebkitMaskRepeat: 'no-repeat',
-				maskPosition: 'center',
-				WebkitMaskPosition: 'center',
+				maskPosition: 'top',
+				WebkitMaskPosition: 'top',
 				background: 'var(--color-brand-secondary)'
 			};
 
