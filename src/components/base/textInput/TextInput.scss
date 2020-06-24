@@ -30,6 +30,9 @@ $inputHeight: 42px;
 		&.password {
 			padding-right: $inputHeight;
 		}
+		&::placeholder {
+			color: var(--color-content-tertiary);
+		}
 	}
 
 	&:focus {
