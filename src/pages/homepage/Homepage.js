@@ -20,6 +20,7 @@ let Homepage = () => {
 		}, [history]);
 
 	window.addEventListener('hashchange', hashChange);
+
 	React.useEffect(() => {
 		const payload = {
 			method: 'POST',

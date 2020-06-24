@@ -33,7 +33,10 @@ let Dashboard = () => {
 			<Loader fullpage />
 			:
 			<div className='dashboard'>
-				{'This is you dashboard'}
+				<p onClick={() => {
+					history.push('/logout');
+				}}
+				>Logout from your dashboard</p>
 			</div>
 	);
 };

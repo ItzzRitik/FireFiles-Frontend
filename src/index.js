@@ -11,7 +11,14 @@ import Homepage from './pages/homepage/Homepage';
 import Dashboard from './pages/dashboard/Dashboard';
 import Logout from './pages/logout/Logout';
 
-document.querySelector('.app').classList.add('light');
+let changeTheme = (accent) => {
+	document.querySelector('.app').classList.toggle('dark');
+	document.querySelector('.app').classList.toggle(accent);
+};
+window.changeTheme = changeTheme;
+
+document.querySelector('.app').classList.add('dark');
+console.log('rerendered');
 
 ReactDOM.render(
 	<StyletronProvider value={new Styletron()}>
@@ -21,7 +28,10 @@ ReactDOM.render(
 				<Route exact path='/dashboard' component={Dashboard} />
 				<Route exact path='/logout' component={Logout} />
 				<Route exact path='/login' render={() => (<Redirect to='/#login' />)} />
-				<Route exact path='/*' render={() => (<Redirect to='/' />)} />
+				<Route exact path='/*' render={() => {
+					return (<div>You are lost</div>);
+				}}
+				/>
 			</Switch>
 		</BrowserRouter>
 	</StyletronProvider>,
