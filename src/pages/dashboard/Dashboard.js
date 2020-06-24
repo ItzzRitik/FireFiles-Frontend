@@ -3,6 +3,7 @@ import socketIO from 'socket.io-client';
 import { useHistory } from 'react-router-dom';
 
 import Loader from '../../components/base/loader/Loader';
+import Sidebar from '../../components/sidebar/Sidebar';
 import './Dashboard.scss';
 
 let Dashboard = () => {
@@ -36,6 +37,7 @@ let Dashboard = () => {
 			<Loader fullpage />
 			:
 			<div className='dashboard'>
+				<Sidebar />
 				<p onClick={() => {
 					history.push('/logout');
 				}}
