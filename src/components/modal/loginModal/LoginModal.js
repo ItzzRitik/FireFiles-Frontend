@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import isEmail from 'validator/lib/isEmail';
 
 import './LoginModal.scss';
@@ -6,8 +7,8 @@ import Backdrop from '../../base/backdrop/Backdrop';
 import TextInput from '../../base/textInput/TextInput';
 import Button from '../../base/button/Button';
 
-let LoginModal = (props) => {
-	let [showSignUp, setShowSignUp] = React.useState(false),
+const LoginModal = (props) => {
+	const [showSignUp, setShowSignUp] = React.useState(false),
 		[animateSlide, setAnimateSlide] = React.useState(false),
 
 		[email, emailInput] = React.useState(''),
@@ -23,6 +24,8 @@ let LoginModal = (props) => {
 		[emailSignUpShake, setEmailSignUpShake] = React.useState(false),
 		[passwordSignUpShake, setPasswordSignUpShake] = React.useState(false),
 		[signUpLoad, setSignUpLoad] = React.useState(false),
+
+		history = useHistory(),
 
 		onOverlayClick = () => {
 			setAnimateSlide(true);
@@ -64,7 +67,7 @@ let LoginModal = (props) => {
 					setSignInLoad(false);
 					if (res.status === 200) {
 						setTimeout(() => {
-							window.location = '/dashboard';
+							return history.push('/dashboard');
 						}, 300);
 					}
 					else if (res.status === 403) {
