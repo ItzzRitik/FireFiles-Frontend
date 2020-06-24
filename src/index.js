@@ -17,8 +17,7 @@ let changeTheme = (accent) => {
 };
 window.changeTheme = changeTheme;
 
-document.querySelector('.app').classList.add('dark');
-console.log('rerendered');
+console.log('Re-Rendered');
 
 ReactDOM.render(
 	<StyletronProvider value={new Styletron()}>

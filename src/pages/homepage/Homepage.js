@@ -29,18 +29,24 @@ let Homepage = () => {
 		};
 		fetch(process.env.REACT_APP_SERVER + '/getUser', payload)
 			.then((response) => {
-				if (response.ok) return response.json();
+				if (response.status === '200') return response.json();
 			}).then((user) => {
 				if (user) window.user = user;
+
 				hashChange();
-			}).catch(() => {
+			}).catch((err) => {
 				hashChange();
 			});
 	  }, [hashChange]);
 
 	return (
 		<div className='homepage'>
-			<center> <a href='#login'>LOGIN</a> </center>
+			<center> <h1 style={{ margin: '0', cursor: 'pointer' }} onClick={() => {
+				history.push('/#login');
+				hashChange();
+			}}
+			         >
+				LOGIN</h1> </center>
 			{showLoginModal && <LoginModal />}
 		</div>
 	);

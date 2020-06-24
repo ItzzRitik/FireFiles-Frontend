@@ -1,4 +1,5 @@
 import React from 'react';
+import socketIO from 'socket.io-client';
 import { useHistory } from 'react-router-dom';
 
 import Loader from '../../components/base/loader/Loader';
@@ -9,24 +10,26 @@ let Dashboard = () => {
 		history = useHistory();
 
 	React.useEffect(() => {
-		const payload = {
-			method: 'POST',
-			credentials: 'include',
-			headers: { 'Content-Type': 'application/json' }
-		};
-		fetch(process.env.REACT_APP_SERVER + '/getUser', payload)
-			.then((res) => {
-				if (res.ok) return res.json();
-			}).then((user) => {
-				if (user) {
-					window.user = user;
-					setBusy(false);
-				}
-				else history.push('/#login');
-			}).catch((err) => {
-				console.log(err);
-			});
-	  	}, [history]);
+		const socket = socketIO(process.env.REACT_APP_SERVER, { reconnect: true });
+		socket.on('connect', () => {
+			console.log('Socket connected');
+		});
+		socket.on('disconnect', () => {
+			console.log('Socket disconnected');
+		});
+		socket.on('userData', (user) => {
+			if (user) {
+				window.user = user;
+				return setBusy(false);
+			}
+			history.push('/#login');
+		});
+		socket.on('error', (error) => {
+			if (error === 'forbidden') {
+				history.push('/#login');
+			}
+		});
+	}, [history]);
 
 	return (
 		isBusy ?
