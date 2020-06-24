@@ -24,6 +24,23 @@
 	--color-alert-warning: #F0AD4E;
 	--color-alert-error: #D9534F;
 }
+.dark {
+	--color-background-primary: #111111;
+	--color-background-secondary: #555555;
+	--color-background-tertiary: #EEEEEE;
+	
+	--color-brand-primary: #3EA2E7;
+	--color-brand-secondary: #1F7DBB;
+	
+	--color-content-primary: #333333;
+	--color-content-primary-alternate: #FFFFFF;
+	--color-content-secondary: #444444;
+	--color-content-tertiary: #505050;
+	
+	--color-alert-success: #5CB85C;
+	--color-alert-warning: #F0AD4E;
+	--color-alert-error: #D9534F;
+}
 
 // functions
 @function stripUnits($number) {
