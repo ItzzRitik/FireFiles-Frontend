@@ -1,22 +1,23 @@
-import React from 'react';
-import './Homepage.scss';
+import React, { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 
+import './Homepage.scss';
 import LoginModal from '../../components/modal/loginModal/LoginModal';
 
 let Homepage = () => {
-	let [showLoginModal, setShowLoginModal] = React.useState(false),
-		hashChange = () => {
+	const [showLoginModal, setShowLoginModal] = React.useState(false),
+		history = useHistory(),
+		hashChange = useCallback(() => {
 			if (window.location.hash === '#login') {
 				if (window.user) {
-					window.location = '/dashboard';
-					return;
+					return history.push('/dashboard');
 				}
 
 				return setShowLoginModal(true);
 			}
 
 			return setShowLoginModal(false);
-		};
+		}, [history]);
 
 	window.addEventListener('hashchange', hashChange);
 	React.useEffect(() => {
@@ -27,13 +28,14 @@ let Homepage = () => {
 		};
 		fetch(process.env.REACT_APP_SERVER + '/getUser', payload)
 			.then((response) => {
-				if (response.status === 200) return response.json();
+				if (response.ok) return response.json();
 			}).then((user) => {
 				if (user) window.user = user;
-
+				hashChange();
+			}).catch(() => {
 				hashChange();
 			});
-	  }, []);
+	  }, [hashChange]);
 
 	return (
 		<div className='homepage'>
