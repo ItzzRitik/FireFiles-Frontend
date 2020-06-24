@@ -15,6 +15,8 @@ let Logout = () => {
 		};
 		fetch(process.env.REACT_APP_SERVER + '/logout', payload)
 			.then((response) => {
+				window.user = null;
+
 				if (response.ok) return history.push('/');
 
 				history.push('/#login');
