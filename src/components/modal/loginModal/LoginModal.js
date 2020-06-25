@@ -40,14 +40,14 @@ const LoginModal = (props) => {
 				setEmailShake(true);
 				setTimeout(() => {
 					setEmailShake(false);
-				}, 600);
+				}, 650);
 				return;
 			}
 			if (!password) {
 				setPasswordShake(true);
 				setTimeout(() => {
 					setPasswordShake(false);
-				}, 600);
+				}, 650);
 				return;
 			}
 

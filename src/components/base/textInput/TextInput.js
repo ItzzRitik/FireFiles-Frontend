@@ -35,12 +35,11 @@ let TextInput = (props) => {
 		},
 		classList = '';
 
-	props.shake && (classList += 'shake ');
 	props.type === 'password' && (classList += 'password ');
 	props.icon && (classList += 'icon ');
 
 	return (
-		<div className='textInput'>
+		<div className={'textInput ' + (props.shake ? 'shake' : '')}>
 			<input className={classList}
 				type={eyeMouseDown ? 'text' : props.type}
 				autoComplete={props.autoComplete}

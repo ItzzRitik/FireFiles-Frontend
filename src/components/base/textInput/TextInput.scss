@@ -9,6 +9,7 @@ $inputHeight: 42px;
 	margin: 8px 0;
 	border-radius: 5px;
 	overflow: hidden;
+	border: 1px solid transparent;
 	
 	input {
 		width: 100%;
@@ -43,7 +44,7 @@ $inputHeight: 42px;
 	}
 	&.shake {
 		border-color: #ffcbcb;
-		transition: all 0.2s ease-out;
+		transition: border-color 0.2s ease-out;
 		animation: shake 0.65s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 	}
 
