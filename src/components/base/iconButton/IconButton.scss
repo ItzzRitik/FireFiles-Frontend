@@ -1,3 +1,40 @@
 .iconButton {
-	
+	display: flex;
+	position: relative;
+	width: 45px;
+	height: 45px;
+	margin: 10px 0;
+	border-radius: 12px;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+
+	.icon {
+		position: absolute;
+		width: inherit;
+		height: inherit;
+		background-size: 18px;
+		background-repeat: no-repeat;
+		background-position: center;
+		z-index: 2;
+	}
+
+	.cover {
+		position: absolute;
+		width: 0;
+		height: 0;
+		border-radius: 50%;
+		background-color: #65BCF9;
+		opacity: 0;
+	}
+
+	&.active {
+		.cover {
+			width: inherit;
+			height: inherit;
+			border-radius: inherit;
+			opacity: 1;
+			transition: all 0.25s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+		}
+	}
 }

@@ -1,16 +1,20 @@
 import React from 'react';
 
-import logo from '../../assets/img/logo.svg';
 import './IconButton.scss';
 
 let IconButton = (props) => {
-	let classList = 'iconButton ';
-
-	// props.slideIconButton && (classList += 'slideIconButton ');
+	let getStyle = () => {
+			return {
+				backgroundImage: 'url(' + (props.active ? props.iconActive : props.icon) + ')'
+			};
+		},
+		classList = 'iconButton ';
+	props.active && (classList += 'active ');
 
 	return (
-		<div className={classList} >
-			<img src={logo} />
+		<div className={classList} onClick={() => { if (!props.active) props.onClick(props.name); }}>
+			<span className='icon' style={getStyle()} />
+			<span className='cover' />
 		</div>
 	);
 };
