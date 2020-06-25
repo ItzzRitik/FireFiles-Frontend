@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="306px" height="315px" viewBox="0 0 306 315" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Untitled</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Dashboard" fill="#FFFFFF" fill-rule="nonzero">
+            <path d="M208,0 L276,0 C292.568542,-3.04359188e-15 306,13.4314575 306,30 L306,150 C306,166.568542 292.568542,180 276,180 L203,180 C186.431458,180 173,166.568542 173,150 L173,35 C173,15.6700338 188.670034,-3.55457016e-15 208,0 Z" id="Rectangle"></path>
+            <rect id="Rectangle" x="0" y="135" width="133" height="180" rx="35"></rect>
+            <path d="M208,220 L276,220 C292.568542,220 306,233.431458 306,250 L306,285 C306,301.568542 292.568542,315 276,315 L203,315 C186.431458,315 173,301.568542 173,285 L173,255 C173,235.670034 188.670034,220 208,220 Z" id="Rectangle"></path>
+            <rect id="Rectangle" x="0" y="0" width="133" height="95" rx="35"></rect>
+        </g>
+    </g>
+</svg>
