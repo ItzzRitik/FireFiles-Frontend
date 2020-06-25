@@ -37,7 +37,10 @@ let Dashboard = () => {
 			<Loader fullpage />
 			:
 			<div className='dashboard'>
-				<Sidebar />
+				<Sidebar className='sideBar' />
+				<div className='mainPanel'>
+					<div />
+				</div>
 				<p onClick={() => {
 					history.push('/logout');
 				}}

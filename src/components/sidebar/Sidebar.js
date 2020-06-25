@@ -1,4 +1,6 @@
 import React from 'react';
+
+import logo from '../../assets/img/logo.svg';
 import './Sidebar.scss';
 
 let Sidebar = (props) => {
@@ -8,7 +10,9 @@ let Sidebar = (props) => {
 
 	return (
 		<div className={classList}>
-			<div />
+			<div className='logo' >
+				<img src={logo} />
+			</div>
 		</div>
 	);
 };
