@@ -1,0 +1,44 @@
+.dashbar {
+	display: flex;
+	width: 250px;
+	height: 100%;
+	background-color: var(--color-background-primary);
+	padding-left: 12px;
+
+	.closeDash {
+		width: 25px;
+		height: 25px;
+		background-color: var(--color-background-tertiary);
+		margin-top: 39px;
+		border-radius: 7px;
+		cursor: pointer;
+
+		span {
+			display: inline-block;
+			width: inherit;
+			height: inherit;
+			mask-size: 8px;
+			-webkit-mask-size: 8px;
+			mask-repeat: no-repeat;
+			-webkit-mask-repeat: no-repeat;
+			mask-position: center;
+			-webkit-mask-position: center;
+			margin-left: -1px;
+			background: var(--color-content-tertiary);
+			transition-delay: 0.05s;
+
+			&.open {
+				margin-left: 1px;
+				transform: rotate(-180deg);
+				transition-delay: 0.05s;
+			}
+		}
+
+		&:hover {
+			opacity: 0.7;
+		}
+		&:active {
+			opacity: 0.5;
+		}
+	}
+}
