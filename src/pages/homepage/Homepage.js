@@ -28,8 +28,8 @@ let Homepage = () => {
 			headers: { 'Content-Type': 'application/json' }
 		};
 		fetch(window.APP_URL + '/getUser', payload)
-			.then((response) => {
-				if (response.status === '200') return response.json();
+			.then((res) => {
+				if (res.status === 200) return res.json();
 			}).then((user) => {
 				if (user) window.user = user;
 

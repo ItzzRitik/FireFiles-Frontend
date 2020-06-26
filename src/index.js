@@ -32,10 +32,7 @@ ReactDOM.render(
 				<Route exact path='/dashboard' component={Dashboard} />
 				<Route exact path='/logout' component={Logout} />
 				<Route exact path='/login' render={() => (<Redirect to='/#login' />)} />
-				<Route exact path='/*' render={() => {
-					return (<div>You are lost</div>);
-				}}
-				/>
+				<Route exact path='/*' render={() => (<div>You are lost</div>)} />
 			</Switch>
 		</BrowserRouter>
 	</StyletronProvider>,
