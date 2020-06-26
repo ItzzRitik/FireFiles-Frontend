@@ -6,6 +6,7 @@
 	padding-left: 12px;
 
 	.closeDash {
+		position: absolute;
 		width: 25px;
 		height: 25px;
 		background-color: var(--color-background-tertiary);
@@ -43,6 +44,11 @@
 	}
 
 	.storageTitle {
-		
+		font-family: 'Quicksand';
+		font-size: 24px;
+		margin: 110px 0 0 15px;
+		font-weight: 700;
+		color: var(--color-content-primary);
+		opacity: 0.8;
 	}
 }
