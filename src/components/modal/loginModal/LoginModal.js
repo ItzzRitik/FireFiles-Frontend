@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import isEmail from 'validator/lib/isEmail';
 
 import './LoginModal.scss';
-import Back from '../../../assets/img/Back.svg';
+import Arrow from '../../../assets/img/Arrow.svg';
 import Cross from '../../../assets/img/Cross.svg';
 
 import Backdrop from '../../base/backdrop/Backdrop';
@@ -29,11 +29,11 @@ const LoginModal = (props) => {
 		[signUpLoad, setSignUpLoad] = React.useState(false),
 
 		history = useHistory(),
-
 		backButtonMask = {
-			maskImage: 'url(' + (showSignUp ? Back : Cross) + ')',
-			WebkitMaskImage: 'url(' + (showSignUp ? Back : Cross) + ')'
+			maskImage: 'url(' + (showSignUp ? Arrow : Cross) + ')',
+			WebkitMaskImage: 'url(' + (showSignUp ? Arrow : Cross) + ')'
 		},
+
 		onBackClicked = () => {
 			if (showSignUp) return onOverlayClick();
 			onBackdropClick();

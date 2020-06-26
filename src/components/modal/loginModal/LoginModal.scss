@@ -359,7 +359,7 @@ $transitionInterpolator: cubic-bezier(0.455, 0.030, 0.515, 0.955);
 		}
 	}
 }
-@media (max-height: 580px) {
+@media (max-width: 500px) and (max-height: 580px) {
 	.loginPage {
 		.mainContainer {
 			.loginNav {
