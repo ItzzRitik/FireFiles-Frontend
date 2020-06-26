@@ -39,12 +39,8 @@ let Dashboard = () => {
 			<div className='dashboard'>
 				<Sidebar className='sideBar' />
 				<div className='mainPanel'>
-					<div />
+					<div className='contentPanel' />
 				</div>
-				<p onClick={() => {
-					history.push('/logout');
-				}}
-				>Logout from your dashboard</p>
 			</div>
 	);
 };

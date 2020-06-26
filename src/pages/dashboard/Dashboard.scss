@@ -1,4 +1,5 @@
-$sidebarClosedWidth: 70px;
+$sidebarClosedWidth: 60px;
+$storageWidth: 100px;
 $cornerRadius: 30px;
 
 .dashboard {
@@ -17,5 +18,9 @@ $cornerRadius: 30px;
 		background-color: var(--color-background-primary);
 		border-radius: $cornerRadius 0 0 $cornerRadius;
 		box-shadow: -2px 0 40px rgba(0, 0, 0, .2), -2px 0 40px hsla(0, 0%, 100%, .15);
+
+		.contentPanel {
+
+		}
 	}
 }
