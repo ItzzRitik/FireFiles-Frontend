@@ -24,6 +24,7 @@ $transitionInterpolator: cubic-bezier(0.455, 0.030, 0.515, 0.955);
 		max-width: 100%;
 		min-height: 480px;
 		font-family: 'Montserrat', sans-serif;
+		transition: all $transitionDuration ease-in-out;
 
 		* {
 			box-sizing: border-box;
@@ -73,10 +74,16 @@ $transitionInterpolator: cubic-bezier(0.455, 0.030, 0.515, 0.955);
 			position: absolute;
 			top: 0;
 			transition: all $transitionDuration ease-in-out;
+
+			.buttonContainer {
+				margin-top: 20px;
+				transition: all $transitionDuration ease-in-out;
+			}
 		}
 		.signInContainer {
 			left: 0;
 			width: 58%;
+			opacity: 1;
 			z-index: 2;
 		}
 		.signUpContainer {
@@ -84,6 +91,37 @@ $transitionInterpolator: cubic-bezier(0.455, 0.030, 0.515, 0.955);
 			width: 58%;
 			opacity: 0;
 			z-index: 1;
+		}
+		.loginNav {
+			width: 100%;
+			height: 30px;
+			position: absolute;
+			z-index: 5;
+			top: 40px; left: 50%;
+			transform: translateX(-50%);
+
+			.backButton {
+				position: absolute;
+				width: 30px;
+				height: 30px;
+				left: -50px;
+				transition: left $transitionDuration ease-out;
+				mask-size: 20px;
+				-webkit-mask-size: 20px;
+				mask-repeat: no-repeat;
+				-webkit-mask-repeat: no-repeat;
+				mask-position: center;
+				-webkit-mask-position: center;
+				background: var(--color-brand-secondary);
+				cursor: pointer;
+			}
+
+			button {
+				position: absolute;
+				right: -200px;
+				margin-right: 10px;
+				transition: right $transitionDuration/2 ease-out;
+			}
 		}
 		.overlayContainer {
 			position: absolute;
@@ -151,6 +189,7 @@ $transitionInterpolator: cubic-bezier(0.455, 0.030, 0.515, 0.955);
 		
 		&.signUp {
 			.signInContainer {
+				opacity: 0;
 				transform: translateX(71%);
 			}
 			.signUpContainer {
@@ -241,6 +280,98 @@ $transitionInterpolator: cubic-bezier(0.455, 0.030, 0.515, 0.955);
 			margin: 0 5px;
 			height: 40px;
 			width: 40px;
+		}
+	}
+}
+
+@media (max-width: 860px) {
+	.loginPage {
+
+		.mainContainer {
+			width: 100%;
+			height: 100%;
+			border-radius: 0;
+			transition: all $transitionDuration ease-in-out;
+
+			h1 {
+				margin: 0 0 20px 0;
+			}
+
+			.formContainer {
+				width: 100%;
+				padding: 0 10px;
+				background-color: transparent;
+
+				.buttonContainer {
+					margin-top: 50px;
+					transition: all $transitionDuration ease-in-out;
+				}
+			}
+			.signInContainer {
+				opacity: 1;
+				transform: translateX(0);
+			}
+			.signUpContainer {
+				opacity: 0;
+				transform: translateX(100%);
+			}
+			.loginNav {
+				.backButton {
+					left: 25px;
+					transition: left $transitionDuration ease-out;
+				}
+				button {
+					right: 15px;
+					transition: right $transitionDuration/2 ease-out;
+				}
+			}
+			.overlayContainer {
+				left: 100%;
+				visibility: hidden;
+				transition: left $transitionDuration ease-out, visibility 0s linear $transitionDuration;
+			}
+
+			&.signUp {
+				.signInContainer {
+					opacity: 0;
+					transform: translateX(-100%);
+				}
+				.signUpContainer {
+					opacity: 1;
+					transform: translateX(0);
+					animation: slideOverlay $transitionDuration;
+				}
+				.overlayContainer {
+					left: 0;
+					visibility: hidden;
+					transition: left $transitionDuration ease-out, visibility 0s linear $transitionDuration;
+				}
+			}
+		}
+	}
+}
+@media (max-width: 860px) and (min-width: 700px) {
+	.loginPage {
+		.mainContainer {
+			.formContainer {
+				padding: 0 100px;
+			}
+		}
+	}
+}
+@media (max-height: 580px) {
+	.loginPage {
+		.mainContainer {
+			.loginNav {
+				.backButton {
+					left: -50px;
+					transition: left $transitionDuration ease-out;
+				}
+				button {
+					right: -200px;
+					transition: right $transitionDuration/2 ease-out;
+				}
+			}
 		}
 	}
 }

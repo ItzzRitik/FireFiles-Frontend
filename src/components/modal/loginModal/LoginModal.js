@@ -3,6 +3,9 @@ import { useHistory } from 'react-router-dom';
 import isEmail from 'validator/lib/isEmail';
 
 import './LoginModal.scss';
+import Back from '../../../assets/img/Back.svg';
+import Cross from '../../../assets/img/Cross.svg';
+
 import Backdrop from '../../base/backdrop/Backdrop';
 import TextInput from '../../base/textInput/TextInput';
 import Button from '../../base/button/Button';
@@ -27,6 +30,14 @@ const LoginModal = (props) => {
 
 		history = useHistory(),
 
+		backButtonMask = {
+			maskImage: 'url(' + (showSignUp ? Back : Cross) + ')',
+			WebkitMaskImage: 'url(' + (showSignUp ? Back : Cross) + ')'
+		},
+		onBackClicked = () => {
+			if (showSignUp) return onOverlayClick();
+			onBackdropClick();
+		},
 		onOverlayClick = () => {
 			setAnimateSlide(true);
 			setShowSignUp(!showSignUp);
@@ -66,21 +77,15 @@ const LoginModal = (props) => {
 				.then((res) => {
 					setSignInLoad(false);
 					if (res.status === 200) {
-						setTimeout(() => {
-							return history.push('/dashboard');
-						}, 300);
+						setTimeout(() => history.push('/dashboard'), 300);
 					}
 					else if (res.status === 403) {
 						setPasswordShake(true);
-						setTimeout(() => {
-							setPasswordShake(false);
-						}, 600);
+						setTimeout(() => setPasswordShake(false), 600);
 					}
 					else if (res.status === 404) {
 						setEmailShake(true);
-						setTimeout(() => {
-							setEmailShake(false);
-						}, 600);
+						setTimeout(() => setEmailShake(false), 600);
 					}
 					else {
 						// Error occurred
@@ -94,23 +99,17 @@ const LoginModal = (props) => {
 		signUp = () => {
 			if (!name) {
 				setNameShake(true);
-				setTimeout(() => {
-					setNameShake(false);
-				}, 600);
+				setTimeout(() => setNameShake(false), 600);
 				return;
 			}
 			if (!isEmail(emailSignUp)) {
 				setEmailSignUpShake(true);
-				setTimeout(() => {
-					setEmailSignUpShake(false);
-				}, 600);
+				setTimeout(() => setEmailSignUpShake(false), 600);
 				return;
 			}
 			if (!passwordSignUp.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)) {
 				setPasswordSignUpShake(true);
-				setTimeout(() => {
-					setPasswordSignUpShake(false);
-				}, 600);
+				setTimeout(() => setPasswordSignUpShake(false), 600);
 				return;
 			}
 
@@ -184,7 +183,9 @@ const LoginModal = (props) => {
 						value={passwordSignUp}
 						onChange={(event) => passwordSignUpInput(event.target.value)}
 					/>
-					<Button onClick={signUp} label='Sign Up' loading={signUpLoad} />
+					<div className='buttonContainer'>
+						<Button onClick={signUp} label='Sign Up' loading={signUpLoad} />
+					</div>
 				</div>
 				<div className='formContainer signInContainer'>
 					<h1 className='formHeader'>Sign in to Firefiles</h1>
@@ -213,7 +214,13 @@ const LoginModal = (props) => {
 						onChange={(event) => passwordInput(event.target.value)}
 					/>
 					<a href='/'>Forgot your password?</a>
-					<Button onClick={signIn} label='Sign In' loading={signInLoad} />
+					<div className='buttonContainer'>
+						<Button onClick={signIn} label='Sign In' loading={signInLoad} />
+					</div>
+				</div>
+				<div className='loginNav' >
+					<div className='backButton' style={backButtonMask} onClick={onBackClicked} />
+					{ !showSignUp && <Button size='sm' outline label='Create Account' onClick={onOverlayClick} /> }
 				</div>
 				<div className={'overlayContainer ' + (animateSlide ? 'animate' : '')} onClick={onOverlayClick}>
 					<div className='overlay'>
