@@ -1,10 +1,10 @@
 .iconButton {
 	display: flex;
 	position: relative;
-	width: 45px;
-	height: 45px;
+	width: 42px;
+	height: 42px;
 	margin: 10px 0;
-	border-radius: 12px;
+	border-radius: 10px;
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
@@ -21,8 +21,8 @@
 
 	.cover {
 		position: absolute;
-		width: 0;
-		height: 0;
+		width: inherit;
+		height: inherit;
 		border-radius: 50%;
 		background-color: #65BCF9;
 		opacity: 0;
@@ -30,11 +30,9 @@
 
 	&.active {
 		.cover {
-			width: inherit;
-			height: inherit;
 			border-radius: inherit;
 			opacity: 1;
-			transition: all 0.25s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+			transition: all 0.25s ease-in; //cubic-bezier(0.175, 0.885, 0.320, 1.275);
 		}
 	}
 }
