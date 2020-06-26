@@ -25,12 +25,12 @@
 			-webkit-mask-position: center;
 			margin-left: -1px;
 			background: var(--color-content-tertiary);
-			transition-delay: 0.05s;
+			transition-delay: 0.2s;
 
 			&.open {
 				margin-left: 1px;
 				transform: rotate(-180deg);
-				transition-delay: 0.05s;
+				transition-delay: 0.2s;
 			}
 		}
 
@@ -40,5 +40,9 @@
 		&:active {
 			opacity: 0.5;
 		}
+	}
+
+	.storageTitle {
+		
 	}
 }

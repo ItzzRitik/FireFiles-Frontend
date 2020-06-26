@@ -1,19 +1,15 @@
 import React from 'react';
 import './Dashbar.scss';
 
-import ArrowMono from '../../assets/img/ArrowMono.svg';
 
 let Dashbar = (props) => {
-	let closeStyle = {
-			maskImage: 'url(' + ArrowMono + ')',
-			WebkitMaskImage: 'url(' + ArrowMono + ')'
-		},
-		classList = 'dashbar ';
+	let classList = 'dashbar ';
 	return (
 		<div className={classList}>
 			<div className='closeDash' onClick={props.closeDashClick}>
-				<span className={props.closeDash ? 'open' : ''} style={closeStyle} />
+				<span className={props.closeDash ? 'open' : ''} style={props.closeButtonMask} />
 			</div>
+			<h1 className='storageTitle'>Storage</h1>
 		</div>
 	);
 };
