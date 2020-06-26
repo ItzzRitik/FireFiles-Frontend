@@ -5,7 +5,9 @@ let Button = (props) => {
 	let classList = 'button ';
 	props.slideButton && (classList += 'slideButton ');
 	props.slideLeft && (classList += 'slideLeft ');
+	props.outline && (classList += 'outline ');
 	props.loading && (classList += 'loading ');
+	props.size === 'sm' && (classList += 'small ');
 	return (
 		<button className={classList} onClick={props.onClick}>
 			{

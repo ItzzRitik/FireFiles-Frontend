@@ -10,7 +10,6 @@ $easeOutQuad: cubic-bezier(0.455, 0.030, 0.515, 0.955);
 	font-weight: normal;
 	letter-spacing: 1px;
 	text-transform: uppercase;
-	margin-top: 20px;
 	outline: none;
 	min-width: 180px;
 	height: 40px;
@@ -27,6 +26,20 @@ $easeOutQuad: cubic-bezier(0.455, 0.030, 0.515, 0.955);
 	}
 	&:active {
 		transform: scale(0.95);
+	}
+
+	&.outline {
+		background-color: transparent;
+		color: var(--color-brand-primary);
+		border-color: var(--color-brand-primary);
+
+		&:hover {
+			color: var(--color-background-primary);
+			font-weight: normal;
+			transform: scale(1.03);
+			background: var(--color-brand-primary);
+			transition: all 100ms $easeOutQuad;
+		}
 	}
 
 	&.loading {
@@ -97,5 +110,11 @@ $easeOutQuad: cubic-bezier(0.455, 0.030, 0.515, 0.955);
 				}
 			}
 		}
+	}
+
+	&.small {
+		height: 30px;
+		font-size: 12px;
+		font-weight: normal;
 	}
 }
