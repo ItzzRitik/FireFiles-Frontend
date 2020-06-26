@@ -4,10 +4,16 @@ import { useHistory } from 'react-router-dom';
 
 import Loader from '../../components/base/loader/Loader';
 import Sidebar from '../../components/sidebar/Sidebar';
+import Dashbar from '../../components/dashBar/Dashbar';
 import './Dashboard.scss';
 
 let Dashboard = () => {
 	const [isBusy, setBusy] = React.useState(true),
+
+		[closeDash, setCloseDash] = React.useState(false),
+		closeDashClick = () => {
+			setCloseDash(!closeDash);
+		},
 		history = useHistory();
 
 	React.useEffect(() => {
@@ -38,8 +44,11 @@ let Dashboard = () => {
 			:
 			<div className='dashboard'>
 				<Sidebar className='sideBar' />
-				<div className='mainPanel'>
-					<div className='contentPanel' />
+				<div className={'mainPanel ' + (closeDash ? 'close' : '')}>
+					<Dashbar closeDashClick={closeDashClick} closeDash={closeDash} />
+					<div className='contentPanel'>
+						{}
+					</div>
 				</div>
 			</div>
 	);

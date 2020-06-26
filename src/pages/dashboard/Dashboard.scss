@@ -1,10 +1,15 @@
 $sidebarClosedWidth: 60px;
-$storageWidth: 100px;
+$dashbarWidth: 200px;
 $cornerRadius: 30px;
 
 .dashboard {
 	width: 100%;
 	height: 100%;
+
+	* {
+		-webkit-font-smoothing: antialiased;
+    	-moz-osx-font-smoothing: grayscale;
+	}
 
 	.sideBar {
 		
@@ -18,9 +23,23 @@ $cornerRadius: 30px;
 		background-color: var(--color-background-primary);
 		border-radius: $cornerRadius 0 0 $cornerRadius;
 		box-shadow: -2px 0 40px rgba(0, 0, 0, .2), -2px 0 40px hsla(0, 0%, 100%, .15);
+		overflow: hidden;
+		transition: all 0.1s linear;
+
+		&.close {
+			width: calc(100%);
+			border-radius: 0;
+			transition: all 0.1s ease-out;
+		}
 
 		.contentPanel {
-
+			position: absolute;
+			top: 0; right: 0;
+			width: calc(100% - #{$dashbarWidth});
+			height: 100%;
+			background-color: var(--color-background-secondary);
+			border-radius: $cornerRadius 0 0 $cornerRadius;
+			overflow: hidden;
 		}
 	}
 }
