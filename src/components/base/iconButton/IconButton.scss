@@ -26,6 +26,7 @@
 		border-radius: 50%;
 		background-color: #65BCF9;
 		opacity: 0;
+		transition: all 0.15s ease-in; 
 	}
 
 	&.active {

@@ -61,7 +61,6 @@ const LoginModal = (props) => {
 				}, 650);
 				return;
 			}
-
 			setSignInLoad(true);
 			const payload = {
 				method: 'POST',
