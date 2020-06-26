@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
-// light theme color variables
 
 .app {
 	width: 100%;
 	height: 100%;
 
 	--color-background-primary: #FFFFFF;
-	--color-background-secondary: #F6F5F7;
+	--color-background-secondary: #F3F6F9;
 	--color-background-tertiary: #EEEEEE;
 
 	--color-brand-primary: #3EA2E7;
@@ -17,7 +17,7 @@
 	--color-content-primary: #333333;
 	--color-content-primary-alternate: #FFFFFF;
 	--color-content-secondary: #444444;
-	--color-content-tertiary: #505050;
+	--color-content-tertiary: #999999;
 	
 	--color-alert-success: #5CB85C;
 	--color-alert-warning: #F0AD4E;
@@ -26,8 +26,8 @@
 
 .dark {
 	--color-background-primary: #111111;
-	--color-background-secondary: #FFFFFF;
-	--color-background-tertiary: #222222;
+	--color-background-secondary: #222222;
+	--color-background-tertiary: #333333;
 	
 	--color-content-primary: #777777;
 	--color-content-primary-alternate: #FFFFFF;
