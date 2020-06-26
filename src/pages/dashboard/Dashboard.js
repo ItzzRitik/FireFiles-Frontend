@@ -11,7 +11,7 @@ let Dashboard = () => {
 		history = useHistory();
 
 	React.useEffect(() => {
-		const socket = socketIO(process.env.REACT_APP_SERVER, { reconnect: true });
+		const socket = socketIO(window.APP_URL, { reconnect: true });
 		socket.on('connect', () => {
 			console.log('Socket connected');
 		});

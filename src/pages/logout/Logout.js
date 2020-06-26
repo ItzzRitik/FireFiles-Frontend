@@ -13,7 +13,7 @@ let Logout = () => {
 			credentials: 'include',
 			headers: { 'Content-Type': 'application/json' }
 		};
-		fetch(process.env.REACT_APP_SERVER + '/logout', payload)
+		fetch(window.APP_URL + '/logout', payload)
 			.then((response) => {
 				window.user = null;
 

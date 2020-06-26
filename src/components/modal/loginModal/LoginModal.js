@@ -72,7 +72,7 @@ const LoginModal = (props) => {
 				})
 			};
 
-			fetch(process.env.REACT_APP_SERVER + '/login', payload)
+			fetch(window.APP_URL + '/login', payload)
 				.then((res) => {
 					setSignInLoad(false);
 					if (res.status === 200) {
@@ -124,7 +124,7 @@ const LoginModal = (props) => {
 				})
 			};
 
-			fetch(process.env.REACT_APP_SERVER + '/signup', payload)
+			fetch(window.APP_URL + '/signup', payload)
 				.then((res) => {
 					setSignUpLoad(false);
 					console.log(res.status);

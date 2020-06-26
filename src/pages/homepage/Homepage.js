@@ -27,7 +27,7 @@ let Homepage = () => {
 			credentials: 'include',
 			headers: { 'Content-Type': 'application/json' }
 		};
-		fetch(process.env.REACT_APP_SERVER + '/getUser', payload)
+		fetch(window.APP_URL + '/getUser', payload)
 			.then((response) => {
 				if (response.status === '200') return response.json();
 			}).then((user) => {
