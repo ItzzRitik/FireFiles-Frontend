@@ -5,6 +5,9 @@ import StorageMenuItem from '../storageMenuItem/StorageMenuItem';
 import IconOption from '../base/iconOption/IconOption';
 
 import Share from '../../assets/img/Share.svg';
+import Clock from '../../assets/img/Clock.svg';
+import Heart from '../../assets/img/Heart.svg';
+import Trash from '../../assets/img/Trash.svg';
 
 let Dashbar = (props) => {
 	return (
@@ -14,12 +17,15 @@ let Dashbar = (props) => {
 			</div>
 			<h1 className='storageTitle'>Storage</h1>
 			<div className='storageContainer'>
-				<StorageMenuItem name='Dropbox' space='123 Gb / 500 Gb' active />
+				<StorageMenuItem name='Dropbox' space='123 Gb / 500 Gb' />
 				<StorageMenuItem name='Google Drive' space='12 Gb / 15 Gb' />
-				<StorageMenuItem />
+				<StorageMenuItem active />
 			</div>
 			<div className='optionContainer'>
 				<IconOption icon={Share} label='Shared items' />
+				<IconOption icon={Clock} label='Activity' />
+				<IconOption icon={Heart} label='Favourites' />
+				<IconOption icon={Trash} label='Trash' />
 			</div>
 		</div>
 	);
