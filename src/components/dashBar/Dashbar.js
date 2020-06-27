@@ -2,6 +2,9 @@ import React from 'react';
 import './Dashbar.scss';
 
 import StorageMenuItem from '../storageMenuItem/StorageMenuItem';
+import IconOption from '../base/iconOption/IconOption';
+
+import Share from '../../assets/img/Share.svg';
 
 let Dashbar = (props) => {
 	return (
@@ -16,7 +19,7 @@ let Dashbar = (props) => {
 				<StorageMenuItem />
 			</div>
 			<div className='optionContainer'>
-				<span />
+				<IconOption icon={Share} label='Shared items' />
 			</div>
 		</div>
 	);

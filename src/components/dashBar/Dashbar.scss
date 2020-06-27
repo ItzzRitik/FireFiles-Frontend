@@ -2,6 +2,7 @@ $dashbarWidth: 160px;
 
 .dashbar {
 	display: flex;
+	flex-direction: column;
 	width: 250px;
 	height: 100%;
 	background-color: var(--color-background-primary);
@@ -46,6 +47,7 @@ $dashbarWidth: 160px;
 	}
 
 	.storageTitle {
+		width: $dashbarWidth;
 		font-family: 'Quicksand';
 		font-size: 24px;
 		margin: 110px 0 0 15px;
@@ -53,14 +55,12 @@ $dashbarWidth: 160px;
 		color: var(--color-content-primary);
 	}
 	.storageContainer {
-		position: absolute;
 		width: $dashbarWidth;
-		top: 120px;
 		max-height: 225px;
 		overflow-x: hidden;
 		overflow-y: scroll;
 
-		margin: 50px auto;
+		margin: 20px 0;
 		background:
 		linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%, /* Shadows */
 		radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, .1), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, .1), rgba(0, 0, 0, 0)) 0 100%;
@@ -72,5 +72,9 @@ $dashbarWidth: 160px;
 		&::-webkit-scrollbar { 
 			width: 0 !important;
 		}
+	}
+
+	.optionContainer {
+		width: $dashbarWidth;
 	}
 }
