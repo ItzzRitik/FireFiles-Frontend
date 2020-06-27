@@ -1,18 +1,19 @@
 @import '../../../assets/globals/styles/_variables.scss';
 
-$inputHeight: 42px;
-
 .textInput {
+	--inputHeight: 45px;
+
 	position: relative;
 	width: 85%;
-	height: $inputHeight;
-	margin: 8px 0;
+	height: var(--inputHeight);
+	margin: 6px 0;
 	border-radius: 5px;
 	overflow: hidden;
 	border: 1px solid transparent;
 	
 	input {
 		width: 100%;
+		height: var(--inputHeight);
 		background-color: var(--color-background-tertiary);
 		box-shadow: inset 0px 11px 0px 10px var(--color-background-tertiary), inset 0px -11px 0px 10px var(--color-background-tertiary);
 		border: none;
@@ -26,10 +27,10 @@ $inputHeight: 42px;
     	-moz-osx-font-smoothing: grayscale;
 
 		&.icon {
-			padding-left: $inputHeight;
+			padding-left: var(--inputHeight);
 		}
 		&.password {
-			padding-right: $inputHeight;
+			padding-right: var(--inputHeight);
 		}
 		&::placeholder {
 			color: var(--color-content-tertiary);
@@ -52,8 +53,8 @@ $inputHeight: 42px;
 		display: flex;
 		position: absolute;
 		top: 0; left: 0;
-		width: $inputHeight; 
-		height: $inputHeight;
+		width: var(--inputHeight); 
+		height: var(--inputHeight);
 		justify-content: center;
 		align-items: center;
 
@@ -69,8 +70,8 @@ $inputHeight: 42px;
 		display: flex;
 		position: absolute;
 		top: 0; right: 0;
-		width: $inputHeight; 
-		height: $inputHeight;
+		width: var(--inputHeight); 
+		height: var(--inputHeight);
 		justify-content: center;
 		align-items: center;
 		cursor: pointer;
@@ -129,5 +130,11 @@ $inputHeight: 42px;
 	90% {
 	  -webkit-transform: translateX(-8px);
 			  transform: translateX(-8px);
+	}
+}
+
+@media (max-width: 860px) {
+	.textInput {
+		--inputHeight: 55px;
 	}
 }
