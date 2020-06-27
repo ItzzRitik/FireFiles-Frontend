@@ -47,7 +47,7 @@ let Dashboard = () => {
 				history.push('/#login');
 			}
 		});
-	}, [history]);
+	}, [history, closeDashClick, closeContentClick]);
 
 	return (
 		isBusy ?
