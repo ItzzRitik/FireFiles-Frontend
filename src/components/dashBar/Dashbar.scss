@@ -1,9 +1,11 @@
+$dashbarWidth: 160px;
+
 .dashbar {
 	display: flex;
 	width: 250px;
 	height: 100%;
 	background-color: var(--color-background-primary);
-	padding-left: 12px;
+	padding-left: 20px;
 
 	.closeDash {
 		position: absolute;
@@ -26,12 +28,12 @@
 			-webkit-mask-position: center;
 			margin-left: -1px;
 			background: var(--color-content-tertiary);
-			transition-delay: 0.2s;
+			transition-delay: 0.05s;
 
 			&.open {
 				margin-left: 1px;
 				transform: rotate(-180deg);
-				transition-delay: 0.2s;
+				transition-delay: 0.05s;
 			}
 		}
 
@@ -49,6 +51,10 @@
 		margin: 110px 0 0 15px;
 		font-weight: 700;
 		color: var(--color-content-primary);
-		opacity: 0.8;
+	}
+	.storageContainer {
+		position: absolute;
+		top: 160px;
+		width: $dashbarWidth;
 	}
 }
