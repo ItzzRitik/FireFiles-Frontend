@@ -93,6 +93,10 @@ const LoginModal = (props) => {
 				})
 				.then((data) => {
 					// do something with the data
+				})
+				.catch((err) => {
+					console.log(err);
+					setSignInLoad(false);
 				});
 		},
 		signUp = () => {
