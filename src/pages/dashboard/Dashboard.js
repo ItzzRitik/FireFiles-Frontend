@@ -37,8 +37,8 @@ let Dashboard = () => {
 				window.user = user;
 				setBusy(false);
 
-				if (window.innerWidth <= 760) setTimeout(() => closeDashClick(), 800);
-				if (window.innerWidth <= 560) setTimeout(() => closeContentClick(), 900);
+				if (window.innerWidth <= 760) setTimeout(() => setCloseDash(true), 800);
+				if (window.innerWidth <= 560) setTimeout(() => setCloseContent(true), 900);
 			}
 			else history.push('/#login');
 		});
@@ -47,7 +47,7 @@ let Dashboard = () => {
 				history.push('/#login');
 			}
 		});
-	}, [history, closeDashClick, closeContentClick]);
+	}, [history]);
 
 	return (
 		isBusy ?
