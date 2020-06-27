@@ -7,6 +7,7 @@ import ArrowMono from '../../assets/img/ArrowMono.svg';
 import Loader from '../../components/base/loader/Loader';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Dashbar from '../../components/dashBar/Dashbar';
+
 import './Dashboard.scss';
 
 let Dashboard = () => {
@@ -34,9 +35,12 @@ let Dashboard = () => {
 		socket.on('userData', (user) => {
 			if (user) {
 				window.user = user;
-				return setBusy(false);
+				setBusy(false);
+
+				if (window.innerWidth <= 760) setTimeout(() => closeDashClick(), 800);
+				if (window.innerWidth <= 560) setTimeout(() => closeContentClick(), 900);
 			}
-			history.push('/#login');
+			else history.push('/#login');
 		});
 		socket.on('error', (error) => {
 			if (error === 'forbidden') {
