@@ -54,7 +54,23 @@ $dashbarWidth: 160px;
 	}
 	.storageContainer {
 		position: absolute;
-		top: 160px;
 		width: $dashbarWidth;
+		top: 120px;
+		max-height: 225px;
+		overflow-x: hidden;
+		overflow-y: scroll;
+
+		margin: 50px auto;
+		background:
+		linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%, /* Shadows */
+		radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, .1), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, .1), rgba(0, 0, 0, 0)) 0 100%;
+		background-repeat: no-repeat;
+		background-color: white;
+		background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+		background-attachment: local, local, scroll, scroll;
+
+		&::-webkit-scrollbar { 
+			width: 0 !important;
+		}
 	}
 }

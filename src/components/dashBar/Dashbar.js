@@ -11,9 +11,12 @@ let Dashbar = (props) => {
 			</div>
 			<h1 className='storageTitle'>Storage</h1>
 			<div className='storageContainer'>
-				<StorageMenuItem name='Dropbox' active />
-				<StorageMenuItem name='Google Drive' />
+				<StorageMenuItem name='Dropbox' space='123 Gb / 500 Gb' active />
+				<StorageMenuItem name='Google Drive' space='12 Gb / 15 Gb' />
 				<StorageMenuItem />
+			</div>
+			<div className='optionContainer'>
+				<span />
 			</div>
 		</div>
 	);
