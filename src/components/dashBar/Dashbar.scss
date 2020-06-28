@@ -94,7 +94,7 @@
 		width: var(--dashbarWidth);
 	}
 }
-@media (max-width: 530px) {
+@media (max-width: 580px) {
 	.dashbar {
 		--dashbarWidth: calc(100vw - 50px - 60px - 50px);
 	}

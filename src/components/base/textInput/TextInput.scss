@@ -1,5 +1,3 @@
-@import '../../../assets/globals/styles/_variables.scss';
-
 .textInput {
 	--inputHeight: 45px;
 
@@ -40,6 +38,7 @@
 
 			&:focus {
 				border: 1px solid transparent;
+				width: 100vw;
 			}
 		}
 
