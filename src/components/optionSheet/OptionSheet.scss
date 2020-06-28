@@ -5,6 +5,7 @@ $cornerRadius: 30px;
 
 	position: relative;
 	display: flex;
+	flex-direction: column;
 	width: var(--optionSheetWidth);
 	height: 100%;
 	min-width: var(--optionSheetWidth);
@@ -23,8 +24,7 @@ $cornerRadius: 30px;
 		display: flex;
 		width: var(--optionSheetWidth);
 		height: 80px;
-		top: 0; left: 0;
-		padding: 10px 0 10px 8px;
+		margin: 10px 0;
 		align-items: center;
 
 		.close {
@@ -33,6 +33,7 @@ $cornerRadius: 30px;
 			height: 55px;
 			justify-content: center;
 			align-items: center;
+			margin-left: 8px;
 			margin-right: 20px;
 			cursor: pointer;
 			transition: margin-left 0.1s ease-in;
@@ -78,8 +79,13 @@ $cornerRadius: 30px;
 			font-weight: 700;
 			margin-left: -10px;
 			color: var(--color-content-primary);
-			opacity: 0.9;
+			user-select: none;
 		}
+	}
+
+	.content {
+		width: var(--optionSheetWidth);
+		flex-grow: 1;
 	}
 }
 
@@ -92,7 +98,7 @@ $cornerRadius: 30px;
 }
 @media (max-width: 680px) {
 	.optionSheet {
-		width: 100%;
+		--optionSheetWidth: 100%;
 		border-radius: 0 !important;
 	}
 }
