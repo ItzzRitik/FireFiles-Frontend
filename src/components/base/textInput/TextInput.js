@@ -5,6 +5,7 @@ import Name from './icons/Name.svg';
 import Email from './icons/Email.svg';
 import Password from './icons/Password.svg';
 import Type from './icons/Type.svg';
+import Search from '../../../assets/img/Search.svg';
 
 import './TextInput.scss';
 
@@ -15,33 +16,28 @@ let TextInput = (props) => {
 				case 'Email': return Email;
 				case 'Password': return Password;
 				case 'Name': return Name;
+				case 'Search': return Search;
 				default: return Type;
 			}
 		},
 		getMask = (icon) => {
 			let mask = {
 				maskImage: 'url(' + icon + ')',
-				WebkitMaskImage: 'url(' + icon + ')',
-				maskSize: '18px',
-				WebkitMaskSize: '18px',
-				maskRepeat: 'no-repeat',
-				WebkitMaskRepeat: 'no-repeat',
-				maskPosition: 'top',
-				WebkitMaskPosition: 'top',
-				background: 'var(--color-brand-secondary)'
+				WebkitMaskImage: 'url(' + icon + ')'
 			};
 
 			return mask;
 		},
-		classList = '';
+		classList = 'textInput ';
 
 	props.type === 'password' && (classList += 'password ');
 	props.icon && (classList += 'icon ');
+	props.shake && (classList += 'shake ');
+	props.search && (classList += 'search ');
 
 	return (
-		<div className={'textInput ' + (props.shake ? 'shake' : '')}>
-			<input className={classList}
-				type={eyeMouseDown ? 'text' : props.type}
+		<div className={classList}>
+			<input type={eyeMouseDown ? 'text' : props.type}
 				autoComplete={props.autoComplete}
 				placeholder={props.placeholder}
 				value={props.value}
