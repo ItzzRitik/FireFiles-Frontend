@@ -159,12 +159,12 @@ $cornerRadius: 30px;
 						}
 
 						&:hover {
-							span {
+							.icon {
 								opacity: 0.9;
 							}
 						}
 						&:active {
-							span {
+							.icon {
 								opacity: 0.5;
 							}
 						}
