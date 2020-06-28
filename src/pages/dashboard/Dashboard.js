@@ -19,9 +19,12 @@ let Dashboard = () => {
 		[isBusy, setBusy] = React.useState(true),
 		[closeDash, setCloseDash] = React.useState(false),
 		[closeContent, setCloseContent] = React.useState(false),
-		[closeSheet, setCloseSheet] = React.useState(true),
 		[searchFocus, setSearchFocus] = React.useState(false),
 		[notification, setNotification] = React.useState(false),
+
+		// For Option Sheet
+		[closeSheet, setCloseSheet] = React.useState(true),
+		[sheet, setSheet] = React.useState(''),
 
 		getMask = (icon) => {
 			return {
@@ -37,12 +40,16 @@ let Dashboard = () => {
 		searchFocused = (isFocused) => {
 			if (window.innerWidth <= 860) setSearchFocus(isFocused);
 		},
-		notify = () => {
-			setNotification(!notification);
-		},
 		closeDashClick = () => setCloseDash(!closeDash),
 		closeContentClick = () => setCloseContent(!closeContent),
-		closeSheetClick = () => setCloseSheet(true);
+		closeSheetClick = () => setCloseSheet(true),
+
+		showSheet = (newSheet) => {
+			setSheet(newSheet);
+
+			if (newSheet === sheet) setCloseSheet(!closeSheet);
+			else setCloseSheet(false);
+		};
 
 	React.useEffect(() => {
 		const socket = socketIO(window.APP_URL, { reconnect: true });
@@ -56,6 +63,7 @@ let Dashboard = () => {
 			if (user) {
 				setUser(user);
 				setBusy(false);
+				setNotification(true);
 
 				if (window.innerWidth <= 860) setTimeout(() => setCloseDash(true), 800);
 				if (window.innerWidth <= 560) setTimeout(() => setCloseContent(true), 900);
@@ -85,15 +93,21 @@ let Dashboard = () => {
 								</div>
 								<TextInput className='searchBar' placeholder='Search' onFocus={searchFocused} icon search />
 								<div className='welcomeUser' >
-									<div className='notification' onClick={notify}>
+									<div className='notification' onClick={() => showSheet('Notification')}>
 										<span className={'icon ' + (notification ? 'ring' : '')} style={getMask(Bell)} />
 										{notification && <span className='alert' />}
 									</div>
-									<span className='profile' style={getProfilePicture()} onClick={() => setCloseSheet(false)} />
+									<span className='profile' style={getProfilePicture()} onClick={() => showSheet('Profile')} />
 								</div>
 							</div>
 						</div>
-						<OptionSheet closeIcon={getMask(ArrowMono)} closeClick={closeSheetClick} close={closeSheet} />
+						<OptionSheet closeIcon={getMask(ArrowMono)} closeClick={closeSheetClick} close={closeSheet} sheet={sheet}>
+							{
+								() => {
+
+								}
+							}
+						</OptionSheet>
 					</div>
 				</div>
 			</div>

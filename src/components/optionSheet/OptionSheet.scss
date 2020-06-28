@@ -19,7 +19,6 @@ $cornerRadius: 30px;
 		transition: all 0.1s ease-in;
 	}
 
-
 	.header {
 		display: flex;
 		width: var(--optionSheetWidth);
@@ -71,6 +70,15 @@ $cornerRadius: 30px;
 			&:active {
 				opacity: 0.5;
 			}
+		}
+
+		.title {
+			font-family: 'Quicksand';
+			font-size: 26px;
+			font-weight: 700;
+			margin-left: -10px;
+			color: var(--color-content-primary);
+			opacity: 0.9;
 		}
 	}
 }

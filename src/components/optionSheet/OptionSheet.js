@@ -8,6 +8,7 @@ let OptionSheet = (props) => {
 				<div className='close' onClick={props.closeClick}>
 					<span className={props.close ? 'open' : ''} style={props.closeIcon} />
 				</div>
+				<h1 className='title'>{props.sheet}</h1>
 			</div>
 		</div>
 	);
