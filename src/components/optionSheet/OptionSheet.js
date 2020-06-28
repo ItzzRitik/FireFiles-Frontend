@@ -3,8 +3,12 @@ import './OptionSheet.scss';
 
 let OptionSheet = (props) => {
 	return (
-		<div className='optionSheet'>
-			{'Ritik'}
+		<div className={'optionSheet ' + (props.close ? 'close' : '')}>
+			<div className='header'>
+				<div className='close' onClick={props.closeClick}>
+					<span className={props.close ? 'open' : ''} style={props.closeIcon} />
+				</div>
+			</div>
 		</div>
 	);
 };

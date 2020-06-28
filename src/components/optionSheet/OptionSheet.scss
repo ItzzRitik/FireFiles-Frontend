@@ -1,7 +1,90 @@
-.optionSheet {
-	--optionSheetWidth: 300px;
+$cornerRadius: 30px;
 
+.optionSheet {
+	--optionSheetWidth: 350px;
+
+	position: relative;
+	display: flex;
 	width: var(--optionSheetWidth);
 	height: 100%;
+	min-width: var(--optionSheetWidth);
+	border-radius: $cornerRadius 0 0 $cornerRadius;
+	overflow: hidden;
 	background-color: var(--color-background-primary);
+	transition: all 0.1s ease-out;
+
+	&.close {
+		width: 0;
+		min-width: 0;
+		transition: all 0.1s ease-in;
+	}
+
+
+	.header {
+		display: flex;
+		width: var(--optionSheetWidth);
+		height: 80px;
+		top: 0; left: 0;
+		padding: 10px 0 10px 8px;
+		align-items: center;
+
+		.close {
+			display: flex;
+			width: 55px;
+			height: 55px;
+			justify-content: center;
+			align-items: center;
+			margin-right: 20px;
+			cursor: pointer;
+			transition: margin-left 0.1s ease-in;
+
+			&::after {
+				content: '';
+				width: 25px;
+				height: 25px;
+				border-radius: 7px;
+				background-color: var(--color-background-tertiary);
+			}
+
+			span {
+				position: absolute;
+				display: inline-block;
+				width: inherit;
+				height: inherit;
+				mask-size: 8px;
+				-webkit-mask-size: 8px;
+				mask-repeat: no-repeat;
+				-webkit-mask-repeat: no-repeat;
+				mask-position: center;
+				-webkit-mask-position: center;
+				margin-left: -1px;
+				background: var(--color-content-tertiary);
+				opacity: 0.9;
+				transition-delay: 0.2s;
+				margin-left: 1px;
+				transform: rotate(-180deg);
+			}
+
+			&:hover {
+				opacity: 0.7;
+			}
+			&:active {
+				opacity: 0.5;
+			}
+		}
+	}
+}
+
+@media (max-width: 960px) {
+	.optionSheet {
+		position: absolute;
+		top: 0; right: 0;
+		box-shadow: 0 20px 40px rgba(0, 0, 0, .1), 0 20px 40px hsla(0, 0%, 100%, .10);
+	}
+}
+@media (max-width: 680px) {
+	.optionSheet {
+		width: 100%;
+		border-radius: 0 !important;
+	}
 }
