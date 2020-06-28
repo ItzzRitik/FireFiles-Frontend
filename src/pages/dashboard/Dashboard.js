@@ -14,19 +14,28 @@ import './Dashboard.scss';
 
 let Dashboard = () => {
 	const history = useHistory(),
+		[user, setUser] = React.useState(null),
 		[isBusy, setBusy] = React.useState(true),
 		[closeDash, setCloseDash] = React.useState(false),
 		[closeContent, setCloseContent] = React.useState(false),
 		[searchFocus, setSearchFocus] = React.useState(false),
+		[pendingNotification, setPendingNotification] = React.useState(false),
 
-		closeButtonMask = {
-			maskImage: 'url(' + ArrowMono + ')',
-			WebkitMaskImage: 'url(' + ArrowMono + ')'
+		getMask = (icon) => {
+			return {
+				maskImage: 'url(' + icon + ')',
+				WebkitMaskImage: 'url(' + icon + ')'
+			};
+		},
+		getProfilePicture = () => {
+			if (user.picture) return { backgroundImage: 'url(' + user.picture + ')' };
+			console.log(user.picture);
 		},
 
 		searchFocused = () => {
 			if (window.innerWidth <= 860) setSearchFocus(!searchFocus);
 		},
+		bellClick = () => setPendingNotification(!pendingNotification),
 		closeDashClick = () => setCloseDash(!closeDash),
 		closeContentClick = () => setCloseContent(!closeContent);
 
@@ -40,7 +49,7 @@ let Dashboard = () => {
 		});
 		socket.on('userData', (user) => {
 			if (user) {
-				window.user = user;
+				setUser(user);
 				setBusy(false);
 
 				if (window.innerWidth <= 860) setTimeout(() => setCloseDash(true), 800);
@@ -62,18 +71,19 @@ let Dashboard = () => {
 			<div className='dashboard'>
 				<Sidebar className='sideBar' />
 				<div className={'mainPanel ' + (closeDash ? 'close' : '')}>
-					<Dashbar closeDashClick={closeDashClick} closeDash={closeDash} closeButtonMask={closeButtonMask} />
+					<Dashbar closeDashClick={closeDashClick} closeDash={closeDash} closeButtonMask={getMask(ArrowMono)} />
 					<div className={'contentPanel ' + (closeContent ? 'close' : '')}>
 						<div className={'header ' + (searchFocus ? 'searchFocused ' : '')}>
 							<div className='closeContent' onClick={closeContentClick}>
-								<span className={closeContent ? 'open' : ''} style={closeButtonMask} />
+								<span className={closeContent ? 'open' : ''} style={getMask(ArrowMono)} />
 							</div>
 							<TextInput className='searchBar' placeholder='Search' onFocus={searchFocused} icon search />
 							<div className='welcomeUser' >
-								<div className='notification' >
-									<span style={{ backgroundImage: 'url(' + Bell + ')' }} />
+								<div className='notification' onClick={bellClick}>
+									<span className='icon' style={getMask(Bell)} />
+									{pendingNotification && <span className='alert' />}
 								</div>
-								<span className='profile' style={{ backgroundImage: 'url(' + window.user.picture + ')' }} />
+								<span className='profile' style={getProfilePicture()} />
 							</div>
 						</div>
 					</div>
