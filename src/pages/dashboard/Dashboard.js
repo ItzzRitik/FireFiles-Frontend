@@ -34,7 +34,6 @@ let Dashboard = () => {
 		},
 		getProfilePicture = () => {
 			if (user.picture) return { backgroundImage: 'url(' + user.picture + ')' };
-			console.log(user.picture);
 		},
 
 		searchFocused = (isFocused) => {
@@ -93,21 +92,19 @@ let Dashboard = () => {
 								</div>
 								<TextInput className='searchBar' placeholder='Search' onFocus={searchFocused} icon search />
 								<div className='welcomeUser' >
-									<div className='notification' onClick={() => showSheet('Notification')}>
+									<div className='notification' onClick={() => showSheet('Notifications')}>
 										<span className={'icon ' + (notification ? 'ring' : '')} style={getMask(Bell)} />
 										{notification && <span className='alert' />}
 									</div>
-									<span className='profile' style={getProfilePicture()} onClick={() => showSheet('Profile')} />
+									<span className='profile' style={{ backgroundImage: 'url(' + user.picture + ')' }}
+										onClick={() => showSheet('Profile')}
+									/>
 								</div>
 							</div>
 						</div>
-						<OptionSheet closeIcon={getMask(ArrowMono)} closeClick={closeSheetClick} close={closeSheet} sheet={sheet}>
-							{
-								() => {
-
-								}
-							}
-						</OptionSheet>
+						<OptionSheet closeIcon={getMask(ArrowMono)} closeClick={closeSheetClick} close={closeSheet}
+							sheet={sheet} user={user}
+						/>
 					</div>
 				</div>
 			</div>
