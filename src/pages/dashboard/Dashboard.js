@@ -69,7 +69,7 @@ let Dashboard = () => {
 								<div className='notification' >
 									<span style={{ backgroundImage: 'url(' + Bell + ')' }} />
 								</div>
-								<span className='profile' style={{ backgroundImage: 'url(' + 'https://avatars3.githubusercontent.com/u/24320496?s=460&u=2f167cc90e572d85bae7a4816d781b6391212aed&v=4' + ')' }} />
+								<span className='profile' style={{ backgroundImage: 'url(' + window.user.picture + ')' }} />
 							</div>
 						</div>
 					</div>
