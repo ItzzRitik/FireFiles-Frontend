@@ -1,12 +1,14 @@
-$dashbarWidth: 160px;
-
 .dashbar {
+
+	--dashbarWidth: 160px;
+
 	display: flex;
 	flex-direction: column;
-	width: 250px;
+	width: 550px;
 	height: 100%;
 	background-color: var(--color-background-primary);
 	padding-left: 20px;
+	user-select: none;
 
 	.closeDash {
 		position: absolute;
@@ -47,25 +49,26 @@ $dashbarWidth: 160px;
 	}
 
 	.storageTitle {
-		width: $dashbarWidth;
+		width: var(--dashbarWidth);
 		font-family: 'Quicksand';
 		font-size: 24px;
 		margin: 110px 0 0 15px;
 		font-weight: 700;
 		color: var(--color-content-primary);
 	}
+
 	.storageContainer {
-		width: $dashbarWidth;
+		width: var(--dashbarWidth);
 		max-height: 225px;
 		overflow-x: hidden;
 		overflow-y: scroll;
 
 		margin: 20px 0;
 		background:
-		linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%, /* Shadows */
+		linear-gradient(var(--color-background-primary) 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), var(--color-background-primary) 70%) 0 100%, /* Shadows */
 		radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, .1), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, .1), rgba(0, 0, 0, 0)) 0 100%;
 		background-repeat: no-repeat;
-		background-color: white;
+		background-color: var(--color-background-primary);
 		background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
 		background-attachment: local, local, scroll, scroll;
 
@@ -75,6 +78,12 @@ $dashbarWidth: 160px;
 	}
 
 	.optionContainer {
-		width: $dashbarWidth;
+		width: var(--dashbarWidth);
+	}
+}
+
+@media (max-width: 530px) {
+	.dashbar {
+		--dashbarWidth: calc(100vw - 50px - 60px - 50px);
 	}
 }
