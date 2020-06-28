@@ -7,6 +7,7 @@ import ArrowMono from '../../assets/img/ArrowMono.svg';
 import Loader from '../../components/base/loader/Loader';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Dashbar from '../../components/dashBar/Dashbar';
+import TextInput from '../../components/base/textInput/TextInput';
 
 import './Dashboard.scss';
 
@@ -58,8 +59,20 @@ let Dashboard = () => {
 				<div className={'mainPanel ' + (closeDash ? 'close' : '')}>
 					<Dashbar closeDashClick={closeDashClick} closeDash={closeDash} closeButtonMask={closeButtonMask} />
 					<div className={'contentPanel ' + (closeContent ? 'close' : '')}>
-						<div className='closeContent' onClick={closeContentClick}>
-							<span className={closeContent ? 'open' : ''} style={closeButtonMask} />
+						<div className='header'>
+							<div className='closeContent' onClick={closeContentClick}>
+								<span className={closeContent ? 'open' : ''} style={closeButtonMask} />
+							</div>
+							<TextInput className='searchBar' placeholder='Search' icon search />
+							<div className='welcomeUser' >
+								<div className='notification' >
+									<span />
+								</div>
+								<span className='greeting' />
+								<span className='profile'
+									style={{ backgroundImage: 'url(' + 'https://avatars3.githubusercontent.com/u/24320496?s=460&u=2f167cc90e572d85bae7a4816d781b6391212aed&v=4' + ')' }}
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
