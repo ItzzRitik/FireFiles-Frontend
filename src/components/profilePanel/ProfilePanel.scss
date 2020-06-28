@@ -1,0 +1,41 @@
+$pictureSize: 120px;
+
+.profilePanel {
+	display: flex;
+	flex-direction: column;
+	width: inherit;
+	height: 100%;
+
+	.picture {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: $pictureSize;
+
+		span {
+			position: absolute;
+			display: inline-block;
+			width: $pictureSize;
+			height: $pictureSize;
+			background-size: cover;
+			border-radius: 50%;
+		}
+	}
+
+	.name, .email {
+		width: 100%;
+		margin-top: 20px;
+		font-family: 'Quicksand';
+		font-size: 22px;
+		font-weight: 900;
+		text-align: center;
+		color: var(--color-content-primary);
+	}
+	.email {
+		font-family: 'Montserrat';
+		margin-top: 6px;
+		font-size: 14px;
+		font-weight: 300;
+	}
+}
