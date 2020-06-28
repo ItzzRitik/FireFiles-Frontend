@@ -32,9 +32,6 @@ let Dashboard = () => {
 				WebkitMaskImage: 'url(' + icon + ')'
 			};
 		},
-		getProfilePicture = () => {
-			if (user.picture) return { backgroundImage: 'url(' + user.picture + ')' };
-		},
 
 		searchFocused = (isFocused) => {
 			if (window.innerWidth <= 860) setSearchFocus(isFocused);
