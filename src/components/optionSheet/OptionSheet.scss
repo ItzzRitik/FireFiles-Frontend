@@ -1,0 +1,7 @@
+.optionSheet {
+	--optionSheetWidth: 300px;
+
+	width: var(--optionSheetWidth);
+	height: 100%;
+	background-color: var(--color-background-primary);
+}

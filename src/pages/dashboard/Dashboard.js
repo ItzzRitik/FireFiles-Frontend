@@ -17,12 +17,16 @@ let Dashboard = () => {
 		[isBusy, setBusy] = React.useState(true),
 		[closeDash, setCloseDash] = React.useState(false),
 		[closeContent, setCloseContent] = React.useState(false),
+		[searchFocus, setSearchFocus] = React.useState(false),
 
 		closeButtonMask = {
 			maskImage: 'url(' + ArrowMono + ')',
 			WebkitMaskImage: 'url(' + ArrowMono + ')'
 		},
 
+		searchFocused = () => {
+			if (window.innerWidth <= 860) setSearchFocus(!searchFocus);
+		},
 		closeDashClick = () => setCloseDash(!closeDash),
 		closeContentClick = () => setCloseContent(!closeContent);
 
@@ -39,7 +43,7 @@ let Dashboard = () => {
 				window.user = user;
 				setBusy(false);
 
-				if (window.innerWidth <= 760) setTimeout(() => setCloseDash(true), 800);
+				if (window.innerWidth <= 860) setTimeout(() => setCloseDash(true), 800);
 				if (window.innerWidth <= 560) setTimeout(() => setCloseContent(true), 900);
 			}
 			else history.push('/#login');
@@ -60,11 +64,11 @@ let Dashboard = () => {
 				<div className={'mainPanel ' + (closeDash ? 'close' : '')}>
 					<Dashbar closeDashClick={closeDashClick} closeDash={closeDash} closeButtonMask={closeButtonMask} />
 					<div className={'contentPanel ' + (closeContent ? 'close' : '')}>
-						<div className='header'>
+						<div className={'header ' + (searchFocus ? 'searchFocused ' : '')}>
 							<div className='closeContent' onClick={closeContentClick}>
 								<span className={closeContent ? 'open' : ''} style={closeButtonMask} />
 							</div>
-							<TextInput className='searchBar' placeholder='Search' icon search />
+							<TextInput className='searchBar' placeholder='Search' onFocus={searchFocused} icon search />
 							<div className='welcomeUser' >
 								<div className='notification' >
 									<span style={{ backgroundImage: 'url(' + Bell + ')' }} />

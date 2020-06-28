@@ -24,12 +24,12 @@ $cornerRadius: 30px;
 		border-radius: $cornerRadius 0 0 $cornerRadius;
 		overflow: hidden;
 		z-index: 2;
-		transition: all 0.1s ease-out;
+		transition: all 0.04s linear;
 
 		&.close {
 			width: calc(100%);
 			border-radius: 0;
-			transition: all 0.1s linear;
+			transition: all 0.04s ease-in;
 		}
 
 		.contentPanel {
@@ -59,6 +59,19 @@ $cornerRadius: 30px;
 				padding: 10px 0 10px 20px;
 				align-items: center;
 
+				&.searchFocused {
+					width: calc(100%);
+
+					.closeContent {
+						margin-left: -65px;
+						transition: all 0.1s ease-out;
+					}
+					.welcomeUser { 
+						margin-right: -75px;
+						transition: all 0.1s ease-out;
+					}
+				}
+
 				.closeContent {
 					display: flex;
 					width: 55px;
@@ -67,6 +80,7 @@ $cornerRadius: 30px;
 					align-items: center;
 					margin-right: 15px;
 					cursor: pointer;
+					transition: margin-left 0.1s ease-in;
 
 					&::after {
 						content: '';
@@ -106,14 +120,11 @@ $cornerRadius: 30px;
 						opacity: 0.5;
 					}
 				}
-	
-				.searchBar {
-					
-				}
 
 				.welcomeUser {
 					display: flex;
 					min-width: 115px;
+					transition: margin-right 0.1s ease-in;
 
 					.notification {
 						width: 40px;
@@ -157,7 +168,21 @@ $cornerRadius: 30px;
 	}
 }
 
-@media (max-width: 530px) {
+@media (max-width: 860px) {
+	.dashboard {
+		.mainPanel {
+			.contentPanel {
+				transition: all 0.2s ease-out;
+
+				&.close {
+					transition: all 0.2s ease-in;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 580px) {
 	.dashboard {
 		.mainPanel {
 			.contentPanel {
