@@ -11,15 +11,27 @@
 	user-select: none;
 
 	.closeDash {
+		display: flex;
 		position: absolute;
-		width: 25px;
-		height: 25px;
-		background-color: var(--color-background-tertiary);
-		margin-top: 39px;
+		width: 55px;
+		height: 55px;
+		justify-content: center;
+		align-items: center;
+		margin-top: 23px;
+		margin-left: -5px;
 		border-radius: 7px;
 		cursor: pointer;
 
+		&::after {
+			content: '';
+			width: 25px;
+			height: 25px;
+			border-radius: 7px;
+			background-color: var(--color-background-tertiary);
+		}
+
 		span {
+			position: absolute;
 			display: inline-block;
 			width: inherit;
 			height: inherit;
@@ -59,6 +71,7 @@
 
 	.storageContainer {
 		width: var(--dashbarWidth);
+		min-height: 75px;
 		max-height: 225px;
 		overflow-x: hidden;
 		overflow-y: scroll;
@@ -81,7 +94,6 @@
 		width: var(--dashbarWidth);
 	}
 }
-
 @media (max-width: 530px) {
 	.dashbar {
 		--dashbarWidth: calc(100vw - 50px - 60px - 50px);

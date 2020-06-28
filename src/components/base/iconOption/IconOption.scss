@@ -38,3 +38,9 @@ $optionHeight: 30px;
 		opacity: 0.6;
 	}
 }
+
+@media (max-width: 860px) {
+	.iconOption {
+		height: $optionHeight + 5px;
+	}
+}

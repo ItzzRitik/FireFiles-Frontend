@@ -8,7 +8,7 @@ import Storage from './icons/Storage.svg';
 let StorageMenuItem = (props) => {
 	let classList = 'storageMenuItem ',
 		storage = {
-			name: 'Firefiles',
+			name: 'My files',
 			space: '1.5 Gb / 2 Gb',
 			icon: Storage
 		};

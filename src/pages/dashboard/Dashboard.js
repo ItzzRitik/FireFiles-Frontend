@@ -3,6 +3,7 @@ import socketIO from 'socket.io-client';
 import { useHistory } from 'react-router-dom';
 
 import ArrowMono from '../../assets/img/ArrowMono.svg';
+import Bell from '../../assets/img/Bell.svg';
 
 import Loader from '../../components/base/loader/Loader';
 import Sidebar from '../../components/sidebar/Sidebar';
@@ -66,12 +67,9 @@ let Dashboard = () => {
 							<TextInput className='searchBar' placeholder='Search' icon search />
 							<div className='welcomeUser' >
 								<div className='notification' >
-									<span />
+									<span style={{ backgroundImage: 'url(' + Bell + ')' }} />
 								</div>
-								<span className='greeting' />
-								<span className='profile'
-									style={{ backgroundImage: 'url(' + 'https://avatars3.githubusercontent.com/u/24320496?s=460&u=2f167cc90e572d85bae7a4816d781b6391212aed&v=4' + ')' }}
-								/>
+								<span className='profile' style={{ backgroundImage: 'url(' + 'https://avatars3.githubusercontent.com/u/24320496?s=460&u=2f167cc90e572d85bae7a4816d781b6391212aed&v=4' + ')' }} />
 							</div>
 						</div>
 					</div>
