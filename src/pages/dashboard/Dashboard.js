@@ -32,8 +32,8 @@ let Dashboard = () => {
 			console.log(user.picture);
 		},
 
-		searchFocused = () => {
-			if (window.innerWidth <= 860) setSearchFocus(!searchFocus);
+		searchFocused = (isFocused) => {
+			if (window.innerWidth <= 860) setSearchFocus(isFocused);
 		},
 		bellClick = () => setPendingNotification(!pendingNotification),
 		closeDashClick = () => setCloseDash(!closeDash),

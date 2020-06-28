@@ -42,8 +42,8 @@ let TextInput = (props) => {
 				placeholder={props.placeholder}
 				value={props.value}
 				onChange={props.onChange}
-				onFocus={props.onFocus}
-				onBlur={props.onFocus}
+				onFocus={() => props.onFocus(true)}
+				onBlur={() => props.onFocus(false)}
 			/>
 			{
 				props.icon &&
