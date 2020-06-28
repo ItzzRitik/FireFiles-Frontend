@@ -59,19 +59,6 @@ $cornerRadius: 30px;
 				padding: 10px 0 10px 20px;
 				align-items: center;
 
-				&.searchFocused {
-					width: calc(100%);
-
-					.closeContent {
-						margin-left: -65px;
-						transition: all 0.1s ease-out;
-					}
-					.welcomeUser { 
-						margin-right: -75px;
-						transition: all 0.1s ease-out;
-					}
-				}
-
 				.closeContent {
 					display: flex;
 					width: 55px;
@@ -192,6 +179,20 @@ $cornerRadius: 30px;
 
 				&.close {
 					transition: all 0.2s ease-in;
+				}
+			}
+			.header {
+				&.searchFocused {
+					width: calc(100%);
+
+					.closeContent {
+						margin-left: -65px;
+						transition: all 0.1s ease-out;
+					}
+					.welcomeUser { 
+						margin-right: -75px;
+						transition: all 0.1s ease-out;
+					}
 				}
 			}
 		}

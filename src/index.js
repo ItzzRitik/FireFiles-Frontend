@@ -17,8 +17,6 @@ let changeTheme = (accent) => {
 };
 window.changeTheme = changeTheme;
 
-console.log('Re-Rendered');
-
 window.APP_URL = process.env.REACT_APP_SERVER;
 if (process.env.REACT_APP_ENV === 'dev') {
 	window.APP_URL = (window.location.protocol + '//' + window.location.hostname + ':8080');
