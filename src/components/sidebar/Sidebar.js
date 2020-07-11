@@ -16,7 +16,7 @@ const Sidebar = (props) => {
 		[dashActive, setDashActive] = React.useState(true),
 		[filesActive, setFilesActive] = React.useState(false),
 		logoOnClick = () => {
-			history.push('/logout');
+
 		},
 		menuItemOnClick = (itemName) => {
 			let activate = (activateItem) => {
