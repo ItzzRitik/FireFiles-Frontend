@@ -5,6 +5,11 @@ $pictureSize: 120px;
 	flex-direction: column;
 	width: inherit;
 	height: 100%;
+	
+	::selection {
+		color: var(--color-background-primary);
+		background: var(--color-brand-primary);
+	}
 
 	.picture {
 		display: flex;

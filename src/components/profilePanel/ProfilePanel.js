@@ -1,10 +1,12 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import './ProfilePanel.scss';
 
 import Loader from '../base/loader/Loader';
 
 let OptionSheet = (props) => {
-	const [loadingPicture, setLoadingPicture] = React.useState(true);
+	const history = useHistory(),
+		[loadingPicture, setLoadingPicture] = React.useState(true);
 	React.useEffect(() => {
 		const img = new Image();
 		img.src = props.user.picture;
@@ -13,7 +15,7 @@ let OptionSheet = (props) => {
 
 	return (
 		<div className='profilePanel'>
-			<div className='picture'>
+			<div className='picture' onClick={() => history.push('/logout')}>
 				<span style={{ backgroundImage: 'url(' + props.user.picture + ')' }} />
 				{loadingPicture && <Loader />}
 			</div>
