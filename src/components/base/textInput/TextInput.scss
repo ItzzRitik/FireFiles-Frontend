@@ -119,9 +119,16 @@
 			height: 13px;
 			position: absolute;
 			top: 50%;
+			mask-size: 18px;
+			-webkit-mask-size: 18px;
+			mask-repeat: no-repeat;
+			-webkit-mask-repeat: no-repeat;
+			mask-position: top;
+			-webkit-mask-position: top;
 			margin: 0;
 			transition: all 0.2s ease-in;
 			transform-origin: top;
+			background: var(--color-brand-secondary);
 		}
 		.pupil {
 			position: absolute;
