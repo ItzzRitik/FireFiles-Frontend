@@ -4,12 +4,14 @@ import { useHistory } from 'react-router-dom';
 
 import ArrowMono from '../../assets/img/ArrowMono.svg';
 import Bell from '../../assets/img/Bell.svg';
+import Plus from '../../assets/img/Plus.svg';
 
 import Loader from '../../components/base/loader/Loader';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Dashbar from '../../components/dashBar/Dashbar';
 import OptionSheet from '../../components/optionSheet/OptionSheet';
 import TextInput from '../../components/base/textInput/TextInput';
+import Backdrop from '../../components/base/backdrop/Backdrop';
 
 import './Dashboard.scss';
 
@@ -20,6 +22,7 @@ let Dashboard = () => {
 		[closeDash, setCloseDash] = React.useState(false),
 		[closeContent, setCloseContent] = React.useState(false),
 		[searchFocus, setSearchFocus] = React.useState(false),
+		[fabOpen, setFabOpen] = React.useState(false),
 		[notification, setNotification] = React.useState(false),
 
 		// For Option Sheet
@@ -75,14 +78,13 @@ let Dashboard = () => {
 
 	return (
 		isBusy ?
-			<Loader fullpage />
-			:
+			<Loader fullpage /> :
 			<div className='dashboard'>
 				<Sidebar className='sideBar' />
-				<div className={'mainPanel ' + (closeDash ? 'close' : '')}>
+				<div className={'mainArea ' + (closeDash ? 'close' : '')}>
 					<Dashbar closeDashClick={closeDashClick} closeDash={closeDash} closeButtonMask={getMask(ArrowMono)} />
 					<div className={'contentPanel ' + (closeContent ? 'close' : '')}>
-						<div className='firePanel'>
+						<div className='mainPanel'>
 							<div className={'header ' + (searchFocus ? 'searchFocused ' : '')}>
 								<div className='closeContent' onClick={closeContentClick}>
 									<span className={closeContent ? 'open' : ''} style={getMask(ArrowMono)} />
@@ -98,10 +100,16 @@ let Dashboard = () => {
 									/>
 								</div>
 							</div>
+							<div className='firePanel' >
+								<div className={'fab ' + (fabOpen ? 'open' : '')}>
+									<span className='icon' onClick={() => setFabOpen(true)} style={getMask(Plus)} />
+								</div>
+							</div>
 						</div>
 						<OptionSheet closeIcon={getMask(ArrowMono)} closeClick={closeSheetClick} close={closeSheet}
 							sheet={sheet} user={user}
 						/>
+						{fabOpen && <Backdrop onClick={() => setFabOpen(false)} />}
 					</div>
 				</div>
 			</div>
