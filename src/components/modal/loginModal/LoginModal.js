@@ -149,7 +149,7 @@ const LoginModal = (props) => {
 
 	return (
 		<div className='loginPage'>
-			<Backdrop onClick={onBackdropClick} />
+			<Backdrop onClick={onBackdropClick} dim />
 			<div className={'mainContainer ' + (showSignUp ? 'signUp' : '')} id='mainContainer'>
 				<div className='formContainer signUpContainer'>
 					<h1 className='formHeader'>Create Account</h1>
