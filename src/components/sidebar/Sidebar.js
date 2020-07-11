@@ -1,5 +1,6 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+
+// import { useHistory } from 'react-router-dom';
 
 import IconButton from '../base/iconButton/IconButton';
 
@@ -12,7 +13,7 @@ import DashOutline from './icons/DashboardOutline.svg';
 import './Sidebar.scss';
 
 const Sidebar = (props) => {
-	let history = useHistory(),
+	let // history = useHistory(),
 		[dashActive, setDashActive] = React.useState(true),
 		[filesActive, setFilesActive] = React.useState(false),
 		logoOnClick = () => {
