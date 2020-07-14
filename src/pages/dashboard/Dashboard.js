@@ -5,12 +5,14 @@ import { useHistory } from 'react-router-dom';
 import ArrowMono from '../../assets/img/ArrowMono.svg';
 import Bell from '../../assets/img/Bell.svg';
 import Plus from '../../assets/img/Plus.svg';
+import Cloud from '../../assets/img/Cloud.svg';
 
 import Loader from '../../components/base/loader/Loader';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Dashbar from '../../components/dashBar/Dashbar';
 import OptionSheet from '../../components/optionSheet/OptionSheet';
 import TextInput from '../../components/base/textInput/TextInput';
+import NewFileMenu from '../../components/newFileMenu/NewFileMenu';
 import Backdrop from '../../components/base/backdrop/Backdrop';
 
 import './Dashboard.scss';
@@ -101,15 +103,21 @@ let Dashboard = () => {
 								</div>
 							</div>
 							<div className='firePanel' >
-								<div className={'fab ' + (fabOpen ? 'open' : '')}>
-									<span className='icon' onClick={() => setFabOpen(true)} style={getMask(Plus)} />
+								{fabOpen && <Backdrop onClick={() => setFabOpen(false)} />}
+								<div className={'new ' + (fabOpen ? 'open' : '')}>
+									<div className='fab' onClick={() => setFabOpen(true)} >
+										<span style={getMask(Plus)} />
+									</div>
+									<div className='container'>
+										<NewFileMenu create icon={Plus} title='Create' />
+										<NewFileMenu upload icon={Cloud} title='Upload' />
+									</div>
 								</div>
 							</div>
 						</div>
 						<OptionSheet closeIcon={getMask(ArrowMono)} closeClick={closeSheetClick} close={closeSheet}
 							sheet={sheet} user={user}
 						/>
-						{fabOpen && <Backdrop onClick={() => setFabOpen(false)} />}
 					</div>
 				</div>
 			</div>
