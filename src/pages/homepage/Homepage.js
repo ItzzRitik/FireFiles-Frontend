@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import _ from 'lodash';
 
 import './Homepage.scss';
 import Loader from '../../components/base/loader/Loader';
@@ -19,7 +20,7 @@ let Homepage = () => {
 				setBusy(false);
 			}
 			else if (action === 'login' || action === 'signup') {
-				if (currUser) {
+				if (!_.isEmpty(currUser)) {
 					return history.push('/dashboard');
 				}
 
@@ -61,6 +62,7 @@ let Homepage = () => {
 				if (res.status === 200) return res.json();
 			}).then((user) => {
 				if (user) setCurrUser(user);
+				else setCurrUser({});
 
 				setAction();
 			}).catch((err) => {
