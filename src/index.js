@@ -9,7 +9,6 @@ import * as serviceWorker from './serviceWorker';
 
 import Homepage from './pages/homepage/Homepage';
 import Dashboard from './pages/dashboard/Dashboard';
-import Logout from './pages/logout/Logout';
 
 let changeTheme = (accent) => {
 	document.querySelector('.app').classList.toggle('dark');
@@ -28,8 +27,7 @@ ReactDOM.render(
 			<Switch>
 				<Route exact path='/' component={Homepage} />
 				<Route exact path='/dashboard' component={Dashboard} />
-				<Route exact path='/logout' component={Logout} />
-				<Route exact path='/login' render={() => (<Redirect to='/#login' />)} />
+				<Route exact path='/:action' component={Homepage} />
 				<Route exact path='/*' render={() => (<div>You are lost</div>)} />
 			</Switch>
 		</BrowserRouter>
