@@ -69,11 +69,11 @@ let Dashboard = () => {
 				if (window.innerWidth <= 860) setTimeout(() => setCloseDash(true), 800);
 				if (window.innerWidth <= 560) setTimeout(() => setCloseContent(true), 900);
 			}
-			else history.push('/#login');
+			else history.push('/login');
 		});
 		socket.on('error', (error) => {
 			if (error === 'forbidden') {
-				history.push('/#login');
+				history.push('/login');
 			}
 		});
 	}, [history]);

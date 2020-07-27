@@ -21,13 +21,13 @@ let NewFileMenu = (props) => {
 			<span className='icon' style={getMask(props.icon)} />
 			<span className='title'>{props.title}</span>
 			<div className='subMenu'>
-				<div className='file' onClick={() => uploadFile.current.click()}>
-					<input ref={uploadFile} type='file' multiple />
+				<div className='file' onClick={() => (props.upload ? uploadFile.current.click() : props.onClick())}>
+					{ props.upload && <input ref={uploadFile} type='file' multiple /> }
 					<span className='icon' style={getMask(props.create ? CreateFile : UploadFile)} />
 					<span className='title'>File</span>
 				</div>
-				<div className='folder' onClick={() => uploadFolder.current.click()}>
-					<input ref={uploadFolder} type='file' webkitdirectory='' multiple />
+				<div className='folder' onClick={() => (props.upload ? uploadFolder.current.click() : props.onClick())}>
+					{ props.upload && <input ref={uploadFolder} type='file' webkitdirectory='' multiple /> }
 					<span className='icon' style={getMask(props.create ? CreateFolder : UploadFolder)} />
 					<span className='title'>Folder</span>
 				</div>
