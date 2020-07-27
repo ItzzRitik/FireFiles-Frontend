@@ -28,7 +28,6 @@ ReactDOM.render(
 				<Route exact path='/' component={Homepage} />
 				<Route exact path='/dashboard' component={Dashboard} />
 				<Route exact path='/:action' component={Homepage} />
-				<Route exact path='/*' render={() => (<div>You are lost</div>)} />
 			</Switch>
 		</BrowserRouter>
 	</StyletronProvider>,

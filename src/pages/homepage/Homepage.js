@@ -2,22 +2,28 @@ import React, { useCallback } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import './Homepage.scss';
+import Loader from '../../components/base/loader/Loader';
+import PageNotFound from '../../components/pageNotFound/PageNotFound';
 import LoginModal from '../../components/modal/loginModal/LoginModal';
 
 let Homepage = () => {
-	const [loginModalAction, setLoginModalAction] = React.useState(null),
-		history = useHistory(),
+	const history = useHistory(),
 		{ action } = useParams(),
+		[isBusy, setBusy] = React.useState(true),
+		[homePageState, setHomePageState] = React.useState(null),
+
 		setAction = useCallback(() => {
 			if (!action) {
-				return setLoginModalAction(null);
+				setHomePageState(null);
+				setBusy(false);
 			}
 			else if (action === 'login' || action === 'signup') {
 				if (window.user) {
 					return history.push('/dashboard');
 				}
 
-				return setLoginModalAction(action);
+				setHomePageState(action);
+				setBusy(false);
 			}
 			else if (action === 'logout') {
 				const payload = {
@@ -28,14 +34,16 @@ let Homepage = () => {
 				fetch(window.APP_URL + '/logout', payload)
 					.then((response) => {
 						window.user = null;
+						setBusy(false);
 
 						if (response.ok) return history.push('/');
 
-						history.push('/login');
+						return history.push('/login');
 					});
 			}
 			else {
-				return setLoginModalAction(null);
+				setHomePageState('404');
+				setBusy(false);
 			}
 		}, [history, action]);
 
@@ -58,11 +66,15 @@ let Homepage = () => {
 	  }, [setAction]);
 
 	return (
-		<div className='homepage'>
-			<center> <h1 style={{ margin: '0', cursor: 'pointer' }} onClick={() => history.push('/login')}>LOGIN</h1> </center>
-			<center> <h1 style={{ margin: '0', cursor: 'pointer' }} onClick={() => history.push('/signup')}>SIGNUP</h1> </center>
-			<LoginModal action={loginModalAction} />
-		</div>
+		isBusy ? <Loader fullpage /> : (homePageState === '404') ?
+			<PageNotFound /> :
+			<div className='homepage'>
+				<center> <h1 style={{ margin: '0', cursor: 'pointer' }} onClick={() => history.push('/login')}>
+					LOGIN</h1> </center>
+				<center> <h1 style={{ margin: '0', cursor: 'pointer' }} onClick={() => history.push('/signup')}>
+					SIGNUP</h1> </center>
+				<LoginModal action={homePageState} />
+			</div>
 	);
 };
 
