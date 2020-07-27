@@ -12,6 +12,17 @@ $transitionInterpolator: cubic-bezier(0.455, 0.030, 0.515, 0.955);
 	height: 100%;
 	user-select: none;
 
+	&.pauseTransition {
+		* {
+			transition: all 0s !important;
+		}
+		.mainContainer {
+			&.signUp .signUpContainer {
+				animation: slideOverlay 0s;
+			}
+		}
+	}
+
 	.mainContainer {
 		position:relative;
 		background-color: var(--color-background-primary);

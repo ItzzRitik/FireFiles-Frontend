@@ -1,25 +1,43 @@
 import React, { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import './Homepage.scss';
 import LoginModal from '../../components/modal/loginModal/LoginModal';
 
 let Homepage = () => {
-	const [showLoginModal, setShowLoginModal] = React.useState(false),
+	const [loginModalAction, setLoginModalAction] = React.useState(null),
 		history = useHistory(),
-		hashChange = useCallback(() => {
-			if (window.location.hash === '#login') {
+		{ action } = useParams(),
+		setAction = useCallback(() => {
+			if (!action) {
+				return setLoginModalAction(null);
+			}
+			else if (action === 'login' || action === 'signup') {
 				if (window.user) {
 					return history.push('/dashboard');
 				}
 
-				return setShowLoginModal(true);
+				return setLoginModalAction(action);
 			}
+			else if (action === 'logout') {
+				const payload = {
+					method: 'POST',
+					credentials: 'include',
+					headers: { 'Content-Type': 'application/json' }
+				};
+				fetch(window.APP_URL + '/logout', payload)
+					.then((response) => {
+						window.user = null;
 
-			return setShowLoginModal(false);
-		}, [history]);
+						if (response.ok) return history.push('/');
 
-	window.addEventListener('hashchange', hashChange);
+						history.push('/login');
+					});
+			}
+			else {
+				return setLoginModalAction(null);
+			}
+		}, [history, action]);
 
 	React.useEffect(() => {
 		const payload = {
@@ -33,21 +51,17 @@ let Homepage = () => {
 			}).then((user) => {
 				if (user) window.user = user;
 
-				hashChange();
+				setAction();
 			}).catch((err) => {
-				hashChange();
+				setAction();
 			});
-	  }, [hashChange]);
+	  }, [setAction]);
 
 	return (
 		<div className='homepage'>
-			<center> <h1 style={{ margin: '0', cursor: 'pointer' }} onClick={() => {
-				history.push('/#login');
-				hashChange();
-			}}
-			         >
-				LOGIN</h1> </center>
-			{showLoginModal && <LoginModal />}
+			<center> <h1 style={{ margin: '0', cursor: 'pointer' }} onClick={() => history.push('/login')}>LOGIN</h1> </center>
+			<center> <h1 style={{ margin: '0', cursor: 'pointer' }} onClick={() => history.push('/signup')}>SIGNUP</h1> </center>
+			<LoginModal action={loginModalAction} />
 		</div>
 	);
 };
