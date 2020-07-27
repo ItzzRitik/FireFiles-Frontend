@@ -10,6 +10,7 @@ let Homepage = () => {
 	const history = useHistory(),
 		{ action } = useParams(),
 		[isBusy, setBusy] = React.useState(true),
+		[currUser, setCurrUser] = React.useState(null),
 		[homePageState, setHomePageState] = React.useState(null),
 
 		setAction = useCallback(() => {
@@ -18,7 +19,7 @@ let Homepage = () => {
 				setBusy(false);
 			}
 			else if (action === 'login' || action === 'signup') {
-				if (window.user) {
+				if (currUser) {
 					return history.push('/dashboard');
 				}
 
@@ -33,7 +34,7 @@ let Homepage = () => {
 				};
 				fetch(window.APP_URL + '/logout', payload)
 					.then((response) => {
-						window.user = null;
+						setCurrUser(null);
 						setBusy(false);
 
 						if (response.ok) return history.push('/');
@@ -45,9 +46,11 @@ let Homepage = () => {
 				setHomePageState('404');
 				setBusy(false);
 			}
-		}, [history, action]);
+		}, [history, action, currUser]);
 
 	React.useEffect(() => {
+		if (currUser) return setAction();
+
 		const payload = {
 			method: 'POST',
 			credentials: 'include',
@@ -57,13 +60,13 @@ let Homepage = () => {
 			.then((res) => {
 				if (res.status === 200) return res.json();
 			}).then((user) => {
-				if (user) window.user = user;
+				if (user) setCurrUser(user);
 
 				setAction();
 			}).catch((err) => {
 				setAction();
 			});
-	  }, [setAction]);
+	  }, [setAction, currUser]);
 
 	return (
 		isBusy ? <Loader fullpage /> : (homePageState === '404') ?
