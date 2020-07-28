@@ -20,6 +20,8 @@ $cornerRadius: 30px;
 		top: 0; right: 0;
 		width: calc(100% - #{$sidebarClosedWidth});
 		height: 100%;
+		display: flex;
+		justify-content: flex-end;
 		background-color: var(--color-background-primary);
 		border-radius: $cornerRadius 0 0 $cornerRadius;
 		overflow: hidden;
@@ -34,8 +36,6 @@ $cornerRadius: 30px;
 
 		.contentPanel {
 			display: flex;
-			position: absolute;
-			top: 0; right: 0;
 			width: calc(100% - #{$dashbarWidth} - 12px);
 			height: 100%;
 			background-color: var(--color-background-secondary);
@@ -43,32 +43,55 @@ $cornerRadius: 30px;
 			padding-left: 12px;
 			overflow: hidden;
 			z-index: 3;
-			transition: all 0.08s ease-out;
+			transition: all 0.04s linear;
 
 			&.close {
-				width: calc(100% - 12px);
+				flex-grow: 1;
 				border-radius: 0;
-				transition: all 0.08s ease-in;
+				transition: all 0.04s linear;
 
 				.mainPanel .firePanel {
-					visibility: unset;
+					display: unset;
 				}
 			}
 
 			.mainPanel {
 				position: relative;
+				display: flex;
+				flex-direction: column;
 				width: 100%;
 				height: 100%;
-				flex-shrink: 1;
 
 				.header {
 					position: absolute;
-					display: flex;
-					width: calc(100% - 18px);
-					height: 80px;
 					top: 0; left: 0;
-					padding: 10px 0 10px 8px;
+					display: flex;
+					width: calc(100% - 32px);
+					height: 80px;
+					padding: 10px 10px 10px 22px;
+					z-index: 1;
 					align-items: center;
+
+					&.searchFocused {
+						.options .search {
+							flex-grow: 1;
+							background-color: var(--color-background-primary);
+							transition: all 0.1s ease-out;
+					
+							div {
+								transform: scale(0);
+							}
+							span {
+								opacity: 1;
+								background-color: var(--color-brand-primary);
+							}
+							input {
+								width: calc(100% - (var(--optionButtonSize) * 3 / 2));
+								height: 100%;
+								transition-delay: 0.1s;
+							}
+						}
+					}
 	
 					.closeContent {
 						display: flex;
@@ -102,12 +125,12 @@ $cornerRadius: 30px;
 							margin-left: -1px;
 							background: var(--color-content-tertiary);
 							opacity: 0.9;
-							transition-delay: 0.2s;
+							transition-delay: 0.1s;
 				
 							&.open {
 								margin-left: 1px;
 								transform: rotate(-180deg);
-								transition-delay: 0.2s;
+								transition-delay: 0.1s;
 							}
 						}
 		
@@ -119,19 +142,48 @@ $cornerRadius: 30px;
 						}
 					}
 	
-					.welcomeUser {
+					.options {
+						--optionButtonSize: 48px;
+
+						position: relative;
 						display: flex;
-						min-width: 110px;
+						flex-grow: 1;
 						justify-content: flex-end;
+						align-items: center;
 						padding-right: 20px;
 						transition: margin-right 0.1s ease-in;
 	
 						.notification {
 							position: relative;
-							width: 40px;
-							height: 40px;
-							padding: 0 10px;
+							width: var(--optionButtonSize);
+							height: var(--optionButtonSize);
+							margin-right: 15px;
 							cursor: pointer;
+
+							&:hover {
+								div {
+									transform: scale(0.9);
+									transition: transform 0.11s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+								}
+								.icon, .alert {
+									background-color: var(--color-background-primary);
+									opacity: 1;
+								}
+								.alert {
+									border: 2px solid var(--color-brand-primary);
+								}
+							}
+
+							div {
+								position: absolute;
+								top: 0; left: 0;
+								width: var(--optionButtonSize);
+								height: var(--optionButtonSize);
+								border-radius: 50%;
+								background-color: var(--color-brand-primary);
+								// box-shadow: 0 0 8px rgba(var(--color-brand-primary-rgb), 0.5);
+								transform: scale(0);
+							}
 	
 							.icon {
 								display: inline-block;
@@ -176,30 +228,19 @@ $cornerRadius: 30px;
 	
 							.alert {
 								position: absolute;
-								top: 8px; left: 29px;
+								top: 12px; left: 23px;
 								width: 6px;
 								height: 6px;
 								border: 2px solid var(--color-background-secondary);
 								border-radius: 50%;
 								background-color: var(--color-brand-primary);
 							}
-	
-							&:hover {
-								.icon {
-									opacity: 0.9;
-								}
-							}
-							&:active {
-								.icon {
-									opacity: 0.5;
-								}
-							}
 						}
 	
 						.profile {
 							display: inline-block;
-							width: 40px;
-							height: 40px;
+							width: 45px;
+							height: 45px;
 							border-radius: 50%;
 							background-size: cover;
 							cursor: pointer;
@@ -208,32 +249,42 @@ $cornerRadius: 30px;
 				}
 
 				.firePanel {
+					position: relative;
+					width: 100%;
+					height: 100%;
+					padding: 100px 0 18px 0;
+					overflow-y: auto;
+
+					.content {
+						width: calc(100% - 24px);
+						min-height: 100%;
+						height: 1500px;
+						margin-left: 6px;
+						background-color: var(--color-background-primary);
+						border-radius: 15px;
+					}
 
 					.new {
-						position: absolute;
+						position: fixed;
 						bottom: 0; right: 0;
 						width: 300px;
 						height: 120px;
 						margin: 30px;
 						border-radius: 20px;
-						overflow: hidden;
 						background-color: transparent;
 						transition: all 0.11s ease 0s, border-radius 0.09s ease 0.02s;
 						cursor: pointer;
 						user-select: none;
 
 						&.open {
-							box-shadow: 0 0 10px rgba(29, 19, 19, 0.04), 0 0 10px hsla(0, 0, 100%, 0.01);
-							transition: box-shadow 0.2s ease-in-out;
-
 							.container {
 								clip-path: circle(140% at 91.67% 79.19%);
-								transition: all 0.2s ease-in-out;
+								transition: all 0.1s ease-in-out;
 							}
 							.fab {
 								transform: scale(0);
 								transform-origin: 50%;
-								transition: all 0.1s ease-in-out;
+								transition: all 0.5s ease-in-out;
 							}
 						}
 
@@ -243,9 +294,11 @@ $cornerRadius: 30px;
 							width: 100%;
 							height: calc(100% - 20px);
 							padding: 10px 0;
+							border-radius: 20px;
 							background-color: var(--color-background-primary);
 							clip-path: circle(0 at 91.67% 79.19%);
-							transition: all 0.15s ease-out;
+							box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+							transition: all 0.1s ease-out;
 						}
 
 						.fab {
@@ -282,41 +335,48 @@ $cornerRadius: 30px;
 	.dashboard {
 		.mainArea {
 			.contentPanel {
-				transition: all 0.2s ease-out;
-				&.close {
-					transition: all 0.2s ease-in;
-				}
-			}
-			.mainPanel {
-				.header {
-					&.searchFocused {
-						width: calc(100%);
-						.closeContent {
-							margin-left: -65px;
-							transition: all 0.1s ease-out;
-						}
-						.welcomeUser { 
-							margin-right: -100px;
-							transition: all 0.1s ease-out;
-						}
-					}
-				}
-				.firePanel {
-					.new {
-						width: calc(100% - 12px) !important;
-						margin: 12px 12px 12px 12px !important;
+				transition: all 0.1s ease-out;
 
-						&.open {
-							.container {
-								clip-path: circle(140% at 88.5% 62.5%) !important;
+				&.close {
+					transition: all 0.1s ease-in;
+				}
+
+				.mainPanel {
+					.header {
+						&.searchFocused {
+							.closeContent {
+								display: none;
+							}
+							.options {
+								--optionButtonSize: 55px;
+								padding-right: 8px;
+								.notification, .alert, .profile {
+									display: none;
+								}
 							}
 						}
-
-						.container {
-							clip-path: circle(0 at 88.5% 62.5%) !important;
-						}
-						.fab {
-							margin: 20px;
+					}
+					.firePanel {
+						.new {
+							width: calc(100% - 12px);
+							margin: 12px;
+							&.open {
+								.container {
+									clip-path: circle(140% at 88.5% 62.5%);
+									transition: all 0.2s ease-in-out;
+								}
+								.fab {
+									transition: all 0.1s ease-in-out;
+								}
+							}
+							.container {
+								clip-path: circle(0 at 88.5% 62.5%);
+								box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+								transition: all 0.2s ease-in-out;
+							}
+							.fab {
+								margin: 20px;
+							}
 						}
 					}
 				}
@@ -327,11 +387,39 @@ $cornerRadius: 30px;
 @media (max-width: 580px) {
 	.dashboard {
 		.mainArea {
+			transition: all 0.05s linear;
+
+			&.close {
+				transition: all 0.05s linear;
+			}
 			.contentPanel {
-				width: 50px;
+				width: 62px;
+				padding-left: 0;
+				transition: all 0.1s linear;
+
+				&.close {
+					transition: all 0.1s linear;
+				}
+				&.close {
+					width: 100%;
+				}
+
 				.mainPanel {
 					.firePanel {
-						visibility: hidden;
+						display: none;
+						padding: 100px 0 0 0;
+						margin: 0;
+
+						.content {
+							width: 100%;
+							margin: 0;
+							border-radius: 50px 50px 0 0;
+							box-shadow: 0 0 20px rgba(0, 0, 0, 0.05)
+						}
+						.new {
+							width: calc(100% - 24px);
+							margin: 16px 12px;
+						}
 					}
 				}
 			}

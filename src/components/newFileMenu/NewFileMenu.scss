@@ -1,7 +1,7 @@
 .newFileMenu {
 	position: relative;
 	flex-grow: 1;
-	font-family: 'Quicksand';
+	font-family: var(--font-family-primary);
 	font-weight: 800;
 	font-size: 14px;
 	color: var(--color-content-secondary);

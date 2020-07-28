@@ -31,14 +31,14 @@ $pictureSize: 120px;
 	.name, .email {
 		width: 100%;
 		margin-top: 20px;
-		font-family: 'Quicksand';
+		font-family: var(--font-family-primary);
 		font-size: 22px;
 		font-weight: 900;
 		text-align: center;
 		color: var(--color-content-primary);
 	}
 	.email {
-		font-family: 'Montserrat';
+		font-family: var(--font-family-secondary);
 		margin-top: 6px;
 		font-size: 14px;
 		font-weight: 300;

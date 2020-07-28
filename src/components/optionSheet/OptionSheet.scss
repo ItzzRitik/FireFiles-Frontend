@@ -12,13 +12,12 @@ $cornerRadius: 30px;
 	border-radius: $cornerRadius 0 0 $cornerRadius;
 	overflow: hidden;
 	background-color: var(--color-background-primary);
-	transition: all 0.03s ease-in;
-	opacity: 1;
+	z-index: 3;
+	transition: all 0.05s ease-in;
 
 	&.close {
 		margin-right: calc(var(--optionSheetWidth) * -1);
-		opacity: 0;
-		transition: all 0.02s ease-out;
+		transition: all 0.035s ease-out;
 	}
 
 	.header {
@@ -75,7 +74,7 @@ $cornerRadius: 30px;
 		}
 
 		.title {
-			font-family: 'Quicksand';
+			font-family: var(--font-family-primary);
 			font-size: 26px;
 			font-weight: 700;
 			margin-left: -10px;
@@ -95,7 +94,7 @@ $cornerRadius: 30px;
 		position: absolute;
 		top: 0; right: 0;
 		box-shadow: 0 20px 40px rgba(0, 0, 0, .1), 0 20px 40px hsla(0, 0%, 100%, .10);
-		transition: all 0.06s ease-in;
+		transition: all 0.08s ease-in 0.1s;
 
 		&.close {
 			transition: all 0.06s ease-out;

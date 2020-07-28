@@ -11,9 +11,9 @@ import Loader from '../../components/base/loader/Loader';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Dashbar from '../../components/dashBar/Dashbar';
 import OptionSheet from '../../components/optionSheet/OptionSheet';
-import TextInput from '../../components/base/textInput/TextInput';
 import NewFileMenu from '../../components/newFileMenu/NewFileMenu';
 import Backdrop from '../../components/base/backdrop/Backdrop';
+import SearchButton from '../../components/base/searchButton/SearchButton';
 
 import './Dashboard.scss';
 
@@ -23,9 +23,10 @@ let Dashboard = () => {
 		[isBusy, setBusy] = React.useState(true),
 		[closeDash, setCloseDash] = React.useState(false),
 		[closeContent, setCloseContent] = React.useState(false),
-		[searchFocus, setSearchFocus] = React.useState(false),
+		[searchActive, setSearchActive] = React.useState(false),
 		[fabOpen, setFabOpen] = React.useState(false),
 		[notification, setNotification] = React.useState(false),
+		[showHeader, setShowHeader] = React.useState({ zIndex: 1 }),
 
 		// For Option Sheet
 		[closeSheet, setCloseSheet] = React.useState(true),
@@ -37,19 +38,23 @@ let Dashboard = () => {
 				WebkitMaskImage: 'url(' + icon + ')'
 			};
 		},
-
-		searchFocused = (isFocused) => {
-			if (window.innerWidth <= 860) setSearchFocus(isFocused);
-		},
 		closeDashClick = () => setCloseDash(!closeDash),
-		closeContentClick = () => setCloseContent(!closeContent),
-		closeSheetClick = () => setCloseSheet(true),
+		closeContentClick = () => {
+			if (window.innerWidth <= 580) setCloseDash(!closeContent);
 
+			setCloseContent(!closeContent);
+		},
+		closeSheetClick = () => setCloseSheet(true),
 		showSheet = (newSheet) => {
 			setSheet(newSheet);
 
 			if (newSheet === sheet) setCloseSheet(!closeSheet);
 			else setCloseSheet(false);
+		},
+		onFirePanelScroll = (event) => {
+			const target = event.target;
+			if (target.scrollTop >= 25) setShowHeader({ zIndex: 0 });
+			else setShowHeader({ zIndex: 1 });
 		};
 
 	React.useEffect(() => {
@@ -67,7 +72,7 @@ let Dashboard = () => {
 				setNotification(true);
 
 				if (window.innerWidth <= 860) setTimeout(() => setCloseDash(true), 800);
-				if (window.innerWidth <= 560) setTimeout(() => setCloseContent(true), 900);
+				if (window.innerWidth <= 580) setTimeout(() => setCloseContent(true), 900);
 			}
 			else history.push('/login');
 		});
@@ -87,13 +92,15 @@ let Dashboard = () => {
 					<Dashbar closeDashClick={closeDashClick} closeDash={closeDash} closeButtonMask={getMask(ArrowMono)} />
 					<div className={'contentPanel ' + (closeContent ? 'close' : '')}>
 						<div className='mainPanel'>
-							<div className={'header ' + (searchFocus ? 'searchFocused ' : '')}>
+							<div className={'header ' + (searchActive ? 'searchFocused ' : '')} style={showHeader}>
 								<div className='closeContent' onClick={closeContentClick}>
 									<span className={closeContent ? 'open' : ''} style={getMask(ArrowMono)} />
 								</div>
-								<TextInput className='searchBar' placeholder='Search' onFocus={searchFocused} icon search />
-								<div className='welcomeUser' >
+
+								<div className='options' >
+									<SearchButton setSearchActive={setSearchActive} />
 									<div className='notification' onClick={() => showSheet('Notifications')}>
+										<div />
 										<span className={'icon ' + (notification ? 'ring' : '')} style={getMask(Bell)} />
 										{notification && <span className='alert' />}
 									</div>
@@ -102,7 +109,8 @@ let Dashboard = () => {
 									/>
 								</div>
 							</div>
-							<div className='firePanel' >
+							<div className='firePanel' onScroll={onFirePanelScroll}>
+								<div className='content' />
 								{fabOpen && <Backdrop onClick={() => setFabOpen(false)} />}
 								<div className={'new ' + (fabOpen ? 'open' : '')}>
 									<div className='fab' onClick={() => setFabOpen(true)} >
