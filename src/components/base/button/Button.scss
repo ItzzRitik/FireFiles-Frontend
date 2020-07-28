@@ -14,7 +14,7 @@ $easeOutQuad: cubic-bezier(0.455, 0.030, 0.515, 0.955);
 	min-width: 180px;
 	height: 40px;
 	transition: all 100ms $easeOutQuad;
-	font-family: 'Montserrat', sans-serif;
+	font-family: var(--font-family-secondary);
 	cursor: pointer;
 
 	&:hover {

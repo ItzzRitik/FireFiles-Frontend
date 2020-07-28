@@ -10,7 +10,7 @@
 	--color-background-secondary: #f0f3f9;
 	--color-background-tertiary: #EEEEEE;
 
-	--color-brand-primary: #3EA2E7;
+	--color-brand-primary: rgb(var(--color-brand-primary-rgb));
 	// --color-brand-primary: #37A0EA;
 	--color-brand-secondary: #1F7DBB;
 	
@@ -22,6 +22,27 @@
 	--color-alert-success: #5CB85C;
 	--color-alert-warning: #F0AD4E;
 	--color-alert-error: #D9534F;
+
+
+	// Font Variables
+    --font-family-primary: 'Quicksand', sans-serif;
+	--font-family-secondary: 'Montserrat', sans-serif;
+	
+
+	// Color Schemes	
+	--color-brand-primary-rgb: 62, 162, 231; // Default color scheme
+    &.orange {
+        --color-brand-primary-rgb: 255, 139, 75;
+    }
+    &.red {
+        --color-brand-primary-rgb: 252, 41, 86;
+    }
+    &.violet {
+        --color-brand-primary-rgb: 127, 108, 218;
+    }
+    &.green {
+        --color-brand-primary-rgb: 65, 177, 155;
+    }
 }
 
 .dark {

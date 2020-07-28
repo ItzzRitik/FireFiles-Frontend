@@ -25,7 +25,7 @@ $optionHeight: 30px;
 	.label {
 		height: $optionHeight;
 		line-height: $optionHeight;
-		font-family: 'Quicksand';
+		font-family: var(--font-family-primary);
 		font-weight: 600;
 		font-size: 13px;
 		color: var(--color-content-primary);

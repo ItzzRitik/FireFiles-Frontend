@@ -61,8 +61,7 @@ let Homepage = () => {
 			.then((res) => {
 				if (res.status === 200) return res.json();
 			}).then((user) => {
-				if (user) setCurrUser(user);
-				else setCurrUser({});
+				setCurrUser(user ? user : {});
 
 				setAction();
 			}).catch((err) => {

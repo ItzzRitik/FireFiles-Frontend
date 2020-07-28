@@ -5,7 +5,6 @@ import Name from './icons/Name.svg';
 import Email from './icons/Email.svg';
 import Password from './icons/Password.svg';
 import Type from './icons/Type.svg';
-import Search from '../../../assets/img/Search.svg';
 
 import './TextInput.scss';
 
@@ -16,7 +15,6 @@ let TextInput = (props) => {
 				case 'Email': return Email;
 				case 'Password': return Password;
 				case 'Name': return Name;
-				case 'Search': return Search;
 				default: return Type;
 			}
 		},
@@ -33,7 +31,6 @@ let TextInput = (props) => {
 	props.type === 'password' && (classList += 'password ');
 	props.icon && (classList += 'icon ');
 	props.shake && (classList += 'shake ');
-	props.search && (classList += 'search ');
 
 	return (
 		<div className={classList}>

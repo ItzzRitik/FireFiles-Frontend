@@ -24,35 +24,6 @@
 			padding-right: var(--inputHeight);
 		}
 	}
-	&.search {
-		width: inherit;
-		border-radius: 11px;
-		background-color: var(--color-background-primary);
-
-		input {
-			width: inherit;
-			background-color: transparent;
-			box-shadow: inset 0px 0px 0px 0px var(--color-background-secondary), inset 0px 0px 0px 0px var(--color-background-secondary);
-			border: 1px solid transparent;
-			padding: 0 var(--inputHeight);
-
-			&:focus {
-				border: 1px solid transparent;
-				width: 100vw;
-			}
-		}
-
-		.inputIcon {
-	
-			span {
-				mask-size: 18px;
-				-webkit-mask-size: 18px;
-				mask-position: center;
-				-webkit-mask-position: center;
-				background: var(--color-content-tertiary)
-			}
-		}
-	}
 	
 	input {
 		width: 100%;
@@ -64,7 +35,7 @@
 		border: 1px solid transparent;
 		border-radius: 5px;
 		outline: none;
-		font-family: 'Montserrat', sans-serif;
+		font-family: var(--font-family-secondary);
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 
