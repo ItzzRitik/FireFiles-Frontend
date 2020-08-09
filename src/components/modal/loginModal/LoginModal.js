@@ -111,7 +111,7 @@ const LoginModal = (props) => {
 				setTimeout(() => setEmailSignUpShake(false), 600);
 				return;
 			}
-			if (!passwordSignUp.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)) {
+			if (!passwordSignUp.match(/(?=^.{8,50}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$/)) {
 				setPasswordSignUpShake(true);
 				setTimeout(() => setPasswordSignUpShake(false), 600);
 				return;
@@ -139,6 +139,10 @@ const LoginModal = (props) => {
 						passwordSignUpInput('');
 						passwordInput('');
 						setShowSignUp(false);
+					}
+					else {
+						setPasswordSignUpShake(true);
+						setTimeout(() => setPasswordSignUpShake(false), 600);
 					}
 					return res.text();
 				})
