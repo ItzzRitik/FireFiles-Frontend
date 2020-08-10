@@ -29,7 +29,6 @@ const Dashboard = () => {
 		[fabOpen, setFabOpen] = React.useState(false),
 		[notification, setNotification] = React.useState(false),
 		[showHeader, setShowHeader] = React.useState({ zIndex: 1 }),
-		[uploadList, setUploadList] = React.useState([]),
 
 		// For Option Sheet
 		[closeSheet, setCloseSheet] = React.useState(true),
@@ -80,7 +79,7 @@ const Dashboard = () => {
 						}
 					};
 					xhr.onreadystatechange = function () {  
-						if (xhr.readyState == XMLHttpRequest.DONE) {
+						if (xhr.readyState === XMLHttpRequest.DONE) {
 							console.log(uploadList[0].name, 'Done');
 							uploadList.shift();
 							if(uploadList.length > 0) uploadToS3(uploadList);
