@@ -22,7 +22,7 @@ let NewFileMenu = (props) => {
 			<span className='title'>{props.title}</span>
 			<div className='subMenu'>
 				<div className='file' onClick={() => (props.upload ? uploadFile.current.click() : props.onClick())}>
-					{ props.upload && <input ref={uploadFile} type='file' multiple /> }
+					{ props.upload && <input ref={uploadFile} type='file' onChange={props.file} multiple /> }
 					<span className='icon' style={getMask(props.create ? CreateFile : UploadFile)} />
 					<span className='title'>File</span>
 				</div>

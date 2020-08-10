@@ -1,6 +1,7 @@
 import React from 'react';
 import socketIO from 'socket.io-client';
 import { useHistory } from 'react-router-dom';
+import _ from 'lodash';
 
 import ArrowMono from '../../assets/img/ArrowMono.svg';
 import Bell from '../../assets/img/Bell.svg';
@@ -17,7 +18,8 @@ import SearchButton from '../../components/base/searchButton/SearchButton';
 
 import './Dashboard.scss';
 
-let Dashboard = () => {
+let socket;
+const Dashboard = () => {
 	const history = useHistory(),
 		[user, setUser] = React.useState(null),
 		[isBusy, setBusy] = React.useState(true),
@@ -27,6 +29,7 @@ let Dashboard = () => {
 		[fabOpen, setFabOpen] = React.useState(false),
 		[notification, setNotification] = React.useState(false),
 		[showHeader, setShowHeader] = React.useState({ zIndex: 1 }),
+		[uploadList, setUploadList] = React.useState([]),
 
 		// For Option Sheet
 		[closeSheet, setCloseSheet] = React.useState(true),
@@ -55,15 +58,59 @@ let Dashboard = () => {
 			const target = event.target;
 			if (target.scrollTop >= 25) setShowHeader({ zIndex: 0 });
 			else setShowHeader({ zIndex: 1 });
+		},
+		upload = (event) => {
+			const files = event.target.files;
+			if (files.length === 0) return;
+
+			const filesData = _.map(files, file => _.pick(file, ['name', 'type'])),
+				uploadToS3 = (uploadList) => {
+					var formData = new FormData();
+					Object.keys(uploadList[0].signedS3.fields).forEach(function (key) {
+						formData.append(key, uploadList[0].signedS3.fields[key]);
+					});
+					formData.append('file', _.find(files, {name: uploadList[0].name}));
+
+					const xhr = new XMLHttpRequest();
+					xhr.open('POST', uploadList[0].signedS3.url, true);
+					xhr.upload.onprogress = function(evt) {
+						if (evt.lengthComputable) {
+							var percentComplete = parseInt((evt.loaded / evt.total) * 100);
+							console.log('Upload: ' + percentComplete + '% complete');
+						}
+					};
+					xhr.onreadystatechange = function () {  
+						if (xhr.readyState == XMLHttpRequest.DONE) {
+							console.log(uploadList[0].name, 'Done');
+							uploadList.shift();
+							if(uploadList.length > 0) uploadToS3(uploadList);
+						}
+					}; 
+					xhr.send(formData);
+				};
+
+			socket.emit('getSignedS3', filesData, async (err, uploadList) => {
+				if (err) {
+					return console.log('Error Occurred While Uploading', err);
+				}
+
+				// Uploading file one by one using recursion
+				uploadToS3(uploadList);
+			});
 		};
 
 	React.useEffect(() => {
-		const socket = socketIO(window.APP_URL, { reconnect: true });
+		socket = socketIO(window.APP_URL, { reconnect: true });
 		socket.on('connect', () => {
 			console.log('Socket connected');
 		});
 		socket.on('disconnect', () => {
 			console.log('Socket disconnected');
+		});
+		socket.on('error', (error) => {
+			if (error === 'forbidden') {
+				history.push('/login');
+			}
 		});
 		socket.on('userData', (user) => {
 			if (user) {
@@ -75,11 +122,6 @@ let Dashboard = () => {
 				if (window.innerWidth <= 580) setTimeout(() => setCloseContent(true), 900);
 			}
 			else history.push('/login');
-		});
-		socket.on('error', (error) => {
-			if (error === 'forbidden') {
-				history.push('/login');
-			}
 		});
 	}, [history]);
 
@@ -118,7 +160,7 @@ let Dashboard = () => {
 									</div>
 									<div className='container'>
 										<NewFileMenu create icon={Plus} title='Create' />
-										<NewFileMenu upload icon={Cloud} title='Upload' />
+										<NewFileMenu upload icon={Cloud} title='Upload' file={upload}/>
 									</div>
 								</div>
 							</div>
