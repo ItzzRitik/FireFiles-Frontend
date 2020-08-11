@@ -33,7 +33,7 @@ let Homepage = () => {
 					credentials: 'include',
 					headers: { 'Content-Type': 'application/json' }
 				};
-				fetch(window.APP_URL + '/logout', payload)
+				fetch(process.env.REACT_APP_SERVER + '/logout', payload)
 					.then((response) => {
 						setCurrUser(null);
 						setBusy(false);
@@ -57,7 +57,7 @@ let Homepage = () => {
 			credentials: 'include',
 			headers: { 'Content-Type': 'application/json' }
 		};
-		fetch(window.APP_URL + '/getUser', payload)
+		fetch(process.env.REACT_APP_SERVER + '/getUser', payload)
 			.then((res) => {
 				if (res.status === 200) return res.json();
 			}).then((user) => {

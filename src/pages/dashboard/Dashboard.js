@@ -24,14 +24,16 @@ const Dashboard = () => {
 		[user, setUser] = React.useState(null),
 
 		[loading, setLoading] = React.useState(true),
-		[contentLoading, setContentLoading] = React.useState(true),
-
 		[closeDash, setCloseDash] = React.useState(false),
 		[closeContent, setCloseContent] = React.useState(false),
 		[searchActive, setSearchActive] = React.useState(false),
 		[fabOpen, setFabOpen] = React.useState(false),
 		[notification, setNotification] = React.useState(false),
 		[showHeader, setShowHeader] = React.useState({ zIndex: 1 }),
+
+		[contentLoading, setContentLoading] = React.useState(true),
+		[content, setContent] = React.useState({}),
+		[currentDir, setCurrentDir] = React.useState('/'),
 
 		// For Option Sheet
 		[closeSheet, setCloseSheet] = React.useState(true),
@@ -83,7 +85,10 @@ const Dashboard = () => {
 					};
 					xhr.onreadystatechange = function () {
 						if (xhr.readyState === XMLHttpRequest.DONE) {
+							socket.emit('refreshContent', currentDir);
 							console.log(uploadList[0].name, 'Done');
+
+							// Upload next file in queue
 							uploadList.shift();
 							if (uploadList.length > 0) uploadToS3(uploadList);
 						}
@@ -91,7 +96,7 @@ const Dashboard = () => {
 					xhr.send(formData);
 				};
 
-			socket.emit('getSignedS3', filesData, async (err, uploadList) => {
+			socket.emit('getSignedS3', filesData, currentDir, (err, uploadList) => {
 				if (err) {
 					return console.log('Error Occurred While Uploading', err);
 				}
@@ -102,7 +107,7 @@ const Dashboard = () => {
 		};
 
 	React.useEffect(() => {
-		socket = socketIO(window.APP_URL, { reconnect: true });
+		socket = socketIO(process.env.REACT_APP_SERVER, { reconnect: true });
 		socket.on('connect', () => {
 			console.log('Socket connected');
 		});
@@ -116,6 +121,8 @@ const Dashboard = () => {
 		});
 		socket.on('userData', (user) => {
 			if (user) {
+				socket.emit('getContent', currentDir);
+
 				setUser(user);
 				setLoading(false);
 				setNotification(true);
@@ -125,13 +132,15 @@ const Dashboard = () => {
 			}
 			else history.push('/login');
 		});
-		socket.on('userFiles', (files) => {
-			if (files) {
-				console.log(files);
-				setContentLoading(false);
-			}
+		socket.on('setContent', (dir, content = []) => {
+			console.log(content);
+			setContentLoading(false);
+			setContent(content);
 		});
-	}, [history]);
+		socket.on('refreshContent', (dir, content = []) => {
+			currentDir === dir && setContent(content);
+		});
+	}, [history, currentDir]);
 
 	return (
 		loading ?
@@ -146,7 +155,6 @@ const Dashboard = () => {
 								<div className='closeContent' onClick={closeContentClick}>
 									<span className={closeContent ? 'open' : ''} style={getMask(ArrowMono)} />
 								</div>
-
 								<div className='options' >
 									<SearchButton setSearchActive={setSearchActive} />
 									<div className='notification' onClick={() => showSheet('Notifications')}>
@@ -163,7 +171,19 @@ const Dashboard = () => {
 								<div className='content'>
 									{
 										contentLoading ?
-											<Loader fullpage /> : ''
+											<Loader fullpage /> :
+											<div>
+												{
+													content.folders && content.folders.map((folder, i) => {
+														return <center key={i}>[[{folder}]]</center>;
+													})
+												}
+												{
+													content.files && content.files.map((file, i) => {
+														return <center key={i}>{file.name}</center>;
+													})
+												}
+											</div>
 									}
 								</div>
 								{fabOpen && <Backdrop onClick={() => setFabOpen(false)} />}
