@@ -22,7 +22,10 @@ let socket;
 const Dashboard = () => {
 	const history = useHistory(),
 		[user, setUser] = React.useState(null),
-		[isBusy, setBusy] = React.useState(true),
+
+		[loading, setLoading] = React.useState(true),
+		[contentLoading, setContentLoading] = React.useState(true),
+
 		[closeDash, setCloseDash] = React.useState(false),
 		[closeContent, setCloseContent] = React.useState(false),
 		[searchActive, setSearchActive] = React.useState(false),
@@ -62,29 +65,29 @@ const Dashboard = () => {
 			const files = event.target.files;
 			if (files.length === 0) return;
 
-			const filesData = _.map(files, file => _.pick(file, ['name', 'type'])),
+			const filesData = _.map(files, (file) => _.pick(file, ['name', 'type'])),
 				uploadToS3 = (uploadList) => {
 					var formData = new FormData();
 					Object.keys(uploadList[0].signedS3.fields).forEach(function (key) {
 						formData.append(key, uploadList[0].signedS3.fields[key]);
 					});
-					formData.append('file', _.find(files, {name: uploadList[0].name}));
+					formData.append('file', _.find(files, { name: uploadList[0].name }));
 
 					const xhr = new XMLHttpRequest();
 					xhr.open('POST', uploadList[0].signedS3.url, true);
-					xhr.upload.onprogress = function(evt) {
+					xhr.upload.onprogress = (evt) => {
 						if (evt.lengthComputable) {
 							var percentComplete = parseInt((evt.loaded / evt.total) * 100);
 							console.log('Upload: ' + percentComplete + '% complete');
 						}
 					};
-					xhr.onreadystatechange = function () {  
+					xhr.onreadystatechange = function () {
 						if (xhr.readyState === XMLHttpRequest.DONE) {
 							console.log(uploadList[0].name, 'Done');
 							uploadList.shift();
-							if(uploadList.length > 0) uploadToS3(uploadList);
+							if (uploadList.length > 0) uploadToS3(uploadList);
 						}
-					}; 
+					};
 					xhr.send(formData);
 				};
 
@@ -114,7 +117,7 @@ const Dashboard = () => {
 		socket.on('userData', (user) => {
 			if (user) {
 				setUser(user);
-				setBusy(false);
+				setLoading(false);
 				setNotification(true);
 
 				if (window.innerWidth <= 860) setTimeout(() => setCloseDash(true), 800);
@@ -122,10 +125,16 @@ const Dashboard = () => {
 			}
 			else history.push('/login');
 		});
+		socket.on('userFiles', (files) => {
+			if (files) {
+				console.log(files);
+				setContentLoading(false);
+			}
+		});
 	}, [history]);
 
 	return (
-		isBusy ?
+		loading ?
 			<Loader fullpage /> :
 			<div className='dashboard'>
 				<Sidebar className='sideBar' />
@@ -151,7 +160,12 @@ const Dashboard = () => {
 								</div>
 							</div>
 							<div className='firePanel' onScroll={onFirePanelScroll}>
-								<div className='content' />
+								<div className='content'>
+									{
+										contentLoading ?
+											<Loader fullpage /> : ''
+									}
+								</div>
 								{fabOpen && <Backdrop onClick={() => setFabOpen(false)} />}
 								<div className={'new ' + (fabOpen ? 'open' : '')}>
 									<div className='fab' onClick={() => setFabOpen(true)} >
@@ -159,7 +173,7 @@ const Dashboard = () => {
 									</div>
 									<div className='container'>
 										<NewFileMenu create icon={Plus} title='Create' />
-										<NewFileMenu upload icon={Cloud} title='Upload' file={upload}/>
+										<NewFileMenu upload icon={Cloud} title='Upload' file={upload} />
 									</div>
 								</div>
 							</div>
