@@ -107,6 +107,7 @@ const Dashboard = () => {
 		};
 
 	React.useEffect(() => {
+		setCurrentDir('/');
 		socket = socketIO(process.env.REACT_APP_SERVER, { reconnect: true });
 		socket.on('connect', () => {
 			console.log('Socket connected');
