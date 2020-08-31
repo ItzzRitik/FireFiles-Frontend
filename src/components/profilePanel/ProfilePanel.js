@@ -4,7 +4,7 @@ import './ProfilePanel.scss';
 
 import Loader from '../base/loader/Loader';
 
-let OptionSheet = (props) => {
+let ProfilePanel = (props) => {
 	const history = useHistory(),
 		[loadingPicture, setLoadingPicture] = React.useState(true);
 	React.useEffect(() => {
@@ -25,4 +25,4 @@ let OptionSheet = (props) => {
 	);
 };
 
-export default OptionSheet;
+export default ProfilePanel;
